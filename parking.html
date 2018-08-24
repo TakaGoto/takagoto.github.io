@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Taka Goto | Awesome Dev</title>
+
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+	<link href="https://fonts.googleapis.com/css?family=Reem+Kufi|Roboto:300" rel="stylesheet">
+	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/themes/white-blue.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="javascripts/parking.js"></script>
+</head>
+<body>
+  <div data-id="today-schedule">
+    <div>today's schedule</div>
+  </div>
+
+  <div data-id="tomorrow-schedule">
+    <div>tomorrow's schedule</div>
+  </div>
+
+  <div>
+    <div>submit your schedule for tomorrow: <div data-id="tomorrow"></div></div>
+    <select data-id="name"></select>
+    <div>leaving:</div>
+    <input data-id="leaving"
+           type="time"
+           min="0:00"
+           max="12:00" />
+    <div>coming back:</div>
+    <input data-id="back"
+           type="time"
+           min="0:00"
+           max="12:00" />
+    <button data-id="submit">submit</button>
+  </div>
+</body>
+</html>
