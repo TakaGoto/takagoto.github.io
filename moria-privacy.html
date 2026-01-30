@@ -1,0 +1,127 @@
+---
+layout: default
+title: Moria Privacy Policy
+---
+
+<style>
+  .privacy-policy {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+  }
+  .privacy-policy h1 {
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+  }
+  .privacy-policy h2 {
+    margin-top: 30px;
+    color: #444;
+  }
+  .privacy-policy ul {
+    margin-left: 20px;
+  }
+  .privacy-policy .last-updated {
+    color: #666;
+    font-style: italic;
+  }
+</style>
+
+<div class="privacy-policy">
+  <h1>Moria Privacy Policy</h1>
+  <p class="last-updated">Last Updated: January 30, 2026</p>
+
+  <h2>1. Introduction</h2>
+  <p>Moria is a Daily TikTok Horror Folklore Generator that creates automated horror video content inspired by Japanese folklore. This privacy policy explains how data is collected, used, and stored when using Moria.</p>
+
+  <h2>2. Information We Collect</h2>
+  <p>Moria is a command-line tool that runs locally on your device. It does not collect personal information from end users. However, the following data is processed:</p>
+
+  <h3>2.1 Generated Content</h3>
+  <ul>
+    <li><strong>AI-Generated Stories:</strong> Original horror folklore stories created by AI language models</li>
+    <li><strong>AI-Generated Images:</strong> Atmospheric images generated for each video scene</li>
+    <li><strong>AI-Generated Audio:</strong> Voice narration created via text-to-speech services</li>
+    <li><strong>Final Videos:</strong> Compiled video files ready for publishing</li>
+  </ul>
+
+  <h3>2.2 Authentication Data</h3>
+  <ul>
+    <li><strong>TikTok OAuth Tokens:</strong> Access and refresh tokens for TikTok API access, stored locally on your device</li>
+    <li><strong>API Keys:</strong> Your personal API keys for third-party services (stored in local environment files)</li>
+  </ul>
+
+  <h2>3. Third-Party Services</h2>
+  <p>Moria integrates with the following third-party services. Your use of these services is subject to their respective privacy policies:</p>
+
+  <h3>3.1 AI Language Models</h3>
+  <ul>
+    <li><strong>Anthropic Claude:</strong> Used for story generation. Prompts are sent to Anthropic's API. <a href="https://www.anthropic.com/privacy" target="_blank">Anthropic Privacy Policy</a></li>
+    <li><strong>OpenAI GPT-4:</strong> Alternative option for story generation. <a href="https://openai.com/privacy" target="_blank">OpenAI Privacy Policy</a></li>
+  </ul>
+
+  <h3>3.2 Image Generation</h3>
+  <ul>
+    <li><strong>OpenAI DALL-E 3:</strong> Generates scene images based on text prompts. <a href="https://openai.com/privacy" target="_blank">OpenAI Privacy Policy</a></li>
+  </ul>
+
+  <h3>3.3 Voice Generation</h3>
+  <ul>
+    <li><strong>ElevenLabs:</strong> Converts narration scripts to spoken audio. <a href="https://elevenlabs.io/privacy" target="_blank">ElevenLabs Privacy Policy</a></li>
+    <li><strong>OpenAI TTS:</strong> Alternative text-to-speech option. <a href="https://openai.com/privacy" target="_blank">OpenAI Privacy Policy</a></li>
+  </ul>
+
+  <h3>3.4 Social Media Publishing</h3>
+  <ul>
+    <li><strong>TikTok Content Posting API:</strong> Used to publish videos to TikTok. Videos, titles, and hashtags are sent to TikTok. <a href="https://www.tiktok.com/legal/privacy-policy" target="_blank">TikTok Privacy Policy</a></li>
+  </ul>
+
+  <h2>4. Data Storage</h2>
+  <p>All data is stored locally on your device:</p>
+  <ul>
+    <li><strong>Generated content</strong> is stored in the <code>./out/</code> directory</li>
+    <li><strong>Cached data</strong> is stored in the <code>./cache/</code> directory to reduce API calls</li>
+    <li><strong>OAuth tokens</strong> are stored in <code>.tiktok-tokens.json</code></li>
+  </ul>
+  <p>No data is stored on external servers operated by Moria. Data sent to third-party APIs is subject to their data retention policies.</p>
+
+  <h2>5. Data Sharing</h2>
+  <p>Moria does not share your data with third parties beyond the API services required for functionality:</p>
+  <ul>
+    <li>Story prompts are sent to AI language model providers</li>
+    <li>Image prompts are sent to image generation services</li>
+    <li>Narration scripts are sent to voice synthesis services</li>
+    <li>Final videos and metadata are sent to TikTok when publishing</li>
+  </ul>
+
+  <h2>6. User Rights</h2>
+  <p>Since Moria stores data locally on your device, you have full control over your data:</p>
+  <ul>
+    <li><strong>Access:</strong> All generated content is accessible in your local file system</li>
+    <li><strong>Deletion:</strong> Delete the <code>./out/</code>, <code>./cache/</code> directories and <code>.tiktok-tokens.json</code> file to remove all stored data</li>
+    <li><strong>Portability:</strong> All data is stored in standard formats (JSON, PNG, MP3, MP4)</li>
+  </ul>
+
+  <h2>7. Security</h2>
+  <p>We recommend the following security practices:</p>
+  <ul>
+    <li>Keep your <code>.env</code> file secure and never commit it to version control</li>
+    <li>Regularly rotate your API keys</li>
+    <li>Revoke TikTok OAuth access if you stop using the application</li>
+    <li>Use environment variables instead of hardcoding credentials</li>
+  </ul>
+
+  <h2>8. Children's Privacy</h2>
+  <p>Moria is not intended for use by children under 13 years of age. The generated content may contain horror themes unsuitable for minors.</p>
+
+  <h2>9. Changes to This Policy</h2>
+  <p>We may update this privacy policy from time to time. Changes will be reflected with an updated "Last Updated" date at the top of this page.</p>
+
+  <h2>10. Contact</h2>
+  <p>For questions about this privacy policy or Moria's data practices, please open an issue on the <a href="https://github.com/TerrorApps/punk_records" target="_blank">GitHub repository</a>.</p>
+
+  <hr>
+  <p><em>This privacy policy applies to the Moria Daily TikTok Horror Folklore Generator application.</em></p>
+</div>
