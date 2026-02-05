@@ -9,7 +9,7 @@ author: Taka Goto
 
 # Claude in Xcode: A Developer's First Impressions
 
-Today I spent some time exploring Anthropic's Claude integration directly inside Xcode. The idea is compelling: an AI coding assistant that lives in your IDE, understands your codebase, and helps you write and debug code without context-switching. Here's where it shines and where it falls short.
+Today I spent some time exploring Anthropic's Claude integration directly inside Xcode. After writing about the [pain points of developing mobile apps with AI](/ai/mobile/development/2026/01/26/what-ai-wont-tell-you-about-building-a-mobile-app-with-it.html), I was hoping a tighter IDE integration would solve a lot of those issues. The idea is compelling: an AI coding assistant that lives in your IDE, understands your codebase, and helps you write and debug code without context-switching. Here's where it shines and where it falls short.
 
 ## What Works Well
 
@@ -43,8 +43,6 @@ For React Native, Flutter, or any cross-platform project, most of your code live
 ## Final Thoughts
 
 This feels like a v1 product built for Apple's ideal customer, pure Swift/SwiftUI developers, that hasn't figured out the messy reality of modern app development. Most iOS developers I know are also integrating backends, managing React Native bridges, and working in monorepos.
-
-For now, I'm keeping Claude in Xcode for pure Swift projects but sticking with **Cursor**, **GitHub Copilot**, and **Claude Web** for everything else. They lack the tight IDE integration but don't have arbitrary file access restrictions that break core workflows.
 
 If you **are** building pure native Apple apps, give it a shot. It's genuinely good at what it does. It just doesn't do enough yet.
 
