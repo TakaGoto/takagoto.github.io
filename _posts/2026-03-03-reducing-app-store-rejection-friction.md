@@ -169,15 +169,7 @@ These are gaps between code and policy. No single build tool catches them.
 
 ## Download
 
-If you want to try this approach, here are the files:
-
-- **Blog post markdown**: add this post to your Jekyll `_posts/` folder
 - **Claude audit template**: add the file below to your repo and run Claude against it
-
-> **Note**: If you’re hosting on GitHub Pages, you can commit the template to your repo (e.g., `/assets/claude/claude-app-store-review-firewall.md`) and link it here.
-
 - `claude-app-store-review-firewall.md` (template): **https://github.com/TakaGoto/claude-skills**
 
 ---
-
-*If Apple reviews like it's 2010, I’m preparing for that review like it’s 2026.*
