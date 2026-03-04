@@ -1,69 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+---
+layout: home
+---
 
-	<title>Taka Goto | Awesome Dev</title>
+<section class="home-hero">
+  <h1 class="home-hero-title">Hello, I'm Taka!</h1>
+  <p class="home-hero-tagline">Full Stack Dev. Esports fanatic. Dog lover. Building things with code and curiosity.</p>
+</section>
 
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-
-	<link href="https://fonts.googleapis.com/css?family=Reem+Kufi|Roboto:300" rel="stylesheet">
-	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/styles.css">
-	<link rel="stylesheet" href="css/themes/white-blue.css">
-</head>
-<body>
-	<main>
-		<div class="intro">Hello, I'm Taka!</div>
-		<div class="tagline">Full Stack Dev | Esports Fanatic | Dog Lover | Frenzy Investor </div>
-		<!-- Find your icons from here - https://fontawesome.com/icons?d=gallery&s=brands -->
-		<div class="icons-social">
-			<a target="_blank" href="https://github.com/TakaGoto"><i class="fab fa-github"></i></a>
-			<a target="_blank" href="https://www.linkedin.com/in/TakaGoto"><i class="fab fa-linkedin"></i></a>
-			<a target="_blank" href="https://www.twitch.tv/TakaBaka0"><i class="fab fa-twitch"></i></a>
-			<a target="_blank" href="https://discord.gg/TSXW4aW"><i class="fab fa-discord"></i></a>
-			<a target="_blank" href="https://medium.com/@tak.yuki"><i class="fab fa-medium"></i></a>
+<section class="home-blog">
+  <h2 class="home-section-title">Recent Writing</h2>
+  {% for post in site.posts %}
+  {% assign words = post.content | number_of_words %}
+  {% assign reading_time = words | divided_by: 200 | plus: 1 %}
+  <div class="blog-card">
+    <div class="blog-card-meta">
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+      <span class="blog-card-meta-separator">&middot;</span>
+      <span>{{ reading_time }} min read</span>
     </div>
-		<div class="blog-section">
-			<h2>Blog</h2>
-			<ul class="blog-posts">
-				<li>
-					<a href="/development/ai/tools/2026/03/04/four-claude-code-features-you-probably-arent-using.html">Four Claude Code Features You Probably Aren't Using</a>
-					<span class="post-date">Mar 4, 2026</span>
-				</li>
-				<li>
-					<a href="/development/ai/mobile/2026/03/03/reducing-app-store-rejection-friction.html">Reducing App Store Rejection Friction</a>
-					<span class="post-date">Mar 3, 2026</span>
-				</li>
-				<li>
-					<a href="/ai/llm/rag/2026/02/12/building-rag-locally-to-actually-understand-it.html">Building RAG Locally to Actually Understand It</a>
-					<span class="post-date">Feb 12, 2026</span>
-				</li>
-				<li>
-					<a href="/development/ai/tools/2026/02/05/claude-in-xcode-a-developers-first-impressions.html">Claude in Xcode: A Developer's First Impressions</a>
-					<span class="post-date">Feb 5, 2026</span>
-				</li>
-				<li>
-					<a href="/automation/ai/development/2026/02/02/automating-development-with-claude-code-subagents.html">Automating Development with Claude Code Sub-Agents</a>
-					<span class="post-date">Feb 2, 2026</span>
-				</li>
-				<li>
-					<a href="/mobile/ai/react-native/2026/01/27/what-ai-cant-debug-lessons-from-a-react-native-build-crash.html">What AI Can't Debug: Lessons from a React Native Build Crash</a>
-					<span class="post-date">Jan 27, 2026</span>
-				</li>
-				<li>
-					<a href="/ai/mobile/development/2026/01/26/what-ai-wont-tell-you-about-building-a-mobile-app-with-it.html">What AI Won't Tell You About Building a Mobile App With It</a>
-					<span class="post-date">Jan 26, 2026</span>
-				</li>
-				<li>
-					<a href="/ai/mobile/development/2026/01/22/my-ai-cant-center-an-x-button-on-mobile.html">My AI Can't Center an X Button on Mobile</a>
-					<span class="post-date">Jan 22, 2026</span>
-				</li>
-			</ul>
-		</div>
-	</main>
-</body>
-</html>
+    <h3 class="blog-card-title">
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </h3>
+    {% if post.excerpt %}
+    <p class="blog-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+    {% endif %}
+  </div>
+  {% endfor %}
+</section>

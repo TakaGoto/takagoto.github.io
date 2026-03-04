@@ -5,6 +5,7 @@ date: 2026-02-05
 categories: [development, ai, tools]
 tags: [xcode, claude, ai-coding, react-native, swift]
 author: Taka Goto
+description: "First impressions of Claude's Xcode integration — great for pure Swift projects, but limited for cross-platform and monorepo workflows."
 ---
 
 # Claude in Xcode: A Developer's First Impressions

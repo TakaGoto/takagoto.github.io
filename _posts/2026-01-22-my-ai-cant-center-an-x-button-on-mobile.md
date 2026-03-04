@@ -3,6 +3,8 @@ layout: post
 title: "My AI Can't Center an X Button on Mobile"
 date: 2026-01-22 12:00:00 -0600
 categories: ai mobile development
+author: Taka Goto
+description: "AI coding tools get mobile UI wrong in predictable ways. Here's what I've learned about their blind spots with touch targets, safe areas, and thumb ergonomics."
 ---
 
 Your AI assistant can explain quantum computing, refactor legacy codebases, and write algorithms that would take you hours to figure out. But ask it to center a close button on mobile? You'll spend three prompts watching it guess wrong.

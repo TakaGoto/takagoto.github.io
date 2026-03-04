@@ -5,6 +5,7 @@ date: 2026-03-04
 categories: [development, ai, tools]
 tags: [claude-code, cli, developer-tools, productivity, tips]
 author: Taka Goto
+description: "Four underused Claude Code features that changed my workflow — shell execution, piping, external editor, and file references."
 ---
 
 > **TL;DR**: Claude Code has a lot more surface area than most people use.

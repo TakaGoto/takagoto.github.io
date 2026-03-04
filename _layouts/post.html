@@ -1,0 +1,37 @@
+---
+layout: default
+---
+
+{% assign words = content | number_of_words %}
+{% assign reading_time = words | divided_by: 200 | plus: 1 %}
+
+<article class="post">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+      <span class="post-meta-separator">&middot;</span>
+      <span>{{ reading_time }} min read</span>
+    </div>
+    <h1 class="post-title">{{ page.title }}</h1>
+    {% if page.categories.size > 0 %}
+    <div class="post-categories">
+      {% for category in page.categories %}
+      <span class="post-category">{{ category }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+  <div class="author-bio">
+    <div class="author-info">
+      <div class="author-name">{{ page.author | default: "Taka Goto" }}</div>
+      <div class="author-description">Full Stack Dev &middot; Building things with code and curiosity</div>
+    </div>
+  </div>
+
+  {% include post-nav.html %}
+</article>

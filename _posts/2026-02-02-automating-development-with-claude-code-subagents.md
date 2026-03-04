@@ -4,6 +4,8 @@ title: "Automating Development with Claude Code Sub-Agents"
 date: 2026-02-02
 categories: [automation, ai, development]
 tags: [claude-code, agents, github-actions, workflow]
+author: Taka Goto
+description: "How I built six apps with Claude Code and evolved from conversational coding to a fully automated development pipeline with sub-agents."
 ---
 
 # Automating Development with Claude Code Sub-Agents

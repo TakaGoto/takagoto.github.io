@@ -4,6 +4,8 @@ title: "What AI Can't Debug: Lessons from a React Native Build Crash"
 date: 2026-01-27
 categories: [mobile, ai, react-native]
 tags: [expo, pnpm, monorepo, claude, ai-development]
+author: Taka Goto
+description: "A production build crash that AI couldn't fix — how a pnpm monorepo configuration issue stumped every AI tool I tried."
 ---
 
 I spent hours with an AI coding assistant trying to fix a crash in my React Native app. The app worked perfectly in debug mode but crashed immediately on launch in production builds. Here's what happened, and what it taught me about the limits of AI-assisted mobile development.

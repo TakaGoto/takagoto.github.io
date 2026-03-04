@@ -5,6 +5,7 @@ date: 2026-03-03
 categories: [development, ai, mobile]
 tags: [app-store, claude-code, ios, app-review, automation]
 author: Taka Goto
+description: "How I built a repo-level pre-flight audit to catch App Store rejection issues before submitting — covering IAP, permissions, privacy, and reviewer access."
 ---
 
 > **TL;DR**: AI made it fast for me to build small iOS apps — but App Store review became the bottleneck.  

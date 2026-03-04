@@ -4,6 +4,8 @@ title: "Building RAG Locally to Actually Understand It"
 date: 2026-02-12 12:30:00 -0600
 categories: [ai, llm, rag]
 tags: [rag, embeddings, vector-db, ollama, local, retrieval]
+author: Taka Goto
+description: "Building a small RAG system from scratch on a laptop to understand the ingest-chunk-embed-retrieve-generate pipeline from first principles."
 ---
 
 I recently read through Databricks' tutorial on Retrieval-Augmented Generation (RAG) and it finally *clicked* why people keep saying "RAG is the real product." It's not just "use an LLM." It's a pipeline: **ingest → chunk → embed → retrieve → prompt → generate**.
