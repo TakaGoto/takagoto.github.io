@@ -1,73 +1,84 @@
 ---
 layout: post
-title: "Claude.md Rules vs Real Guardrails"
+title: "CLAUDE.md Rules vs Real Guardrails"
 date: 2026-03-10
-categories: [ai, developer-tools, workflow]
-excerpt: "Prompt files can guide AI behavior, but real safety still comes from hooks, branch protections, and CI."
+categories: [ai, dev-workflow]
+excerpt: "Prompt rules are useful, but hooks, branch protections, and CI are still the real guardrails."
 ---
 
-I recently ran into a small but useful reminder about AI-assisted development.
+I ran into something recently while working with Claude that reminded me of an important distinction.
 
-In our repo, I added a rule to `CLAUDE.md` telling Claude to always create a PR and target `staging`. The intent was straightforward: changes should go through a pull request, which also means no direct pushes to `staging`.
+In our repo, I added a rule to `CLAUDE.md`:
 
-At one point, though, I pushed directly to `staging`, and Claude allowed it.
+> Always create a PR and target `staging`.
+
+The intention was simple.  
+No direct pushes to `staging`.
+
+Since Claude helps automate parts of the workflow, I wanted that rule to guide how changes are made.
+
+At one point though, I pushed directly to `staging` and Claude let it happen.
 
 So I asked why.
 
-Its response was simple:
+Its response was:
 
 > “The rule lives in CLAUDE.md where it belongs — I just didn't follow it.”
 
-That answer was funny, but it also highlighted something important:
+Honestly, that answer was perfect.
 
-## `CLAUDE.md` is guidance, not enforcement
+It highlights something important about working with AI in a codebase.
 
-Files like `CLAUDE.md` are useful because they communicate expectations to the model. They help shape behavior, define conventions, and reduce ambiguity.
+## `CLAUDE.md` rules are guidance
 
-But they are still just instructions.
+Files like `CLAUDE.md` are really just instructions for the model. They explain how you want things to work.
 
-An AI model can misunderstand them, apply them inconsistently, or ignore them altogether. Even when the rule is written clearly, there is no guarantee it will be followed the way a developer expects.
+They’re helpful. They reduce ambiguity.
 
-That means prompt-level rules should not be treated as guardrails.
+But they’re still **interpreted instructions**.
 
-## Real guardrails are still the hard ones
+A model can misunderstand them.  
+Or apply them inconsistently.  
+Or just… not follow them.
 
-The systems I trust most are still the traditional ones:
+Which is exactly what happened.
+
+## Real guardrails are still the same ones
+
+When it comes to protecting a repo, the things I trust are still the traditional guardrails:
 
 - Git hooks
 - Pre-commit checks
 - Branch protections
 - CI pipelines
 
-These do not rely on interpretation. They do not “try” to follow the rule. They enforce it.
+Those systems don’t interpret the rules.
 
-That distinction matters.
+They enforce them.
 
-If a branch is protected, direct pushes fail.  
-If CI is required, unverified changes do not move forward.  
-If hooks are configured properly, certain mistakes are stopped before they ever leave a developer’s machine.
+If a branch is protected, you simply can't push.  
+If CI fails, the change doesn’t go through.
 
-That is a very different level of trust than a markdown file full of instructions for an LLM.
+There’s no ambiguity.
 
-## AI is useful, but not a substitute for enforcement
+## AI instructions vs enforcement
 
-I still think AI assistants are extremely valuable in the development workflow. They can speed up implementation, improve documentation, help with code review preparation, and automate repetitive tasks.
+AI assistants are incredibly useful. I use them constantly now.
 
-But this experience reinforced a boundary I think is worth keeping in mind:
+But this was a good reminder that prompt rules and system rules serve different purposes.
 
-- Use AI instructions to communicate preferences and workflow expectations
-- Use automation to enforce anything that actually matters
+Prompt rules help guide behavior.
 
-If the cost of failure is real, the rule should live in a system that fails closed.
+Actual safeguards should still live in systems that **fail closed**.
+
+If something truly matters — like protecting a branch — I’m far more comfortable trusting hooks, protections, and CI than trusting a model to remember and apply a rule every time.
 
 ## My takeaway
 
-`CLAUDE.md` is helpful for teaching an assistant how I want it to behave.
+`CLAUDE.md` is a great place to document expectations for an AI assistant.
 
-But when it comes to protecting a branch, preserving process, and keeping a repo safe, I am much more comfortable trusting hooks, protections, and CI than trusting a model to remember and apply a written rule every time.
+But if you actually care about enforcing a rule, it should live somewhere the system **physically can’t break it**.
 
-Prompt rules are useful.
+Prompt rules are helpful.
 
 Hard guardrails are reliable.
-
-And AI workflows get better when you know the difference.
