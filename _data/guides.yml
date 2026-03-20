@@ -1,0 +1,111 @@
+- name: "RAG from Scratch"
+  slug: rag
+  description: "Build a Retrieval-Augmented Generation pipeline from first principles. Covers chunking, embeddings, vector search, and generation."
+  status: in-progress
+  accent: "#8B5CF6"
+  sections:
+    - title: "Introduction"
+      anchor: introduction
+    - title: "What RAG Is"
+      anchor: what-rag-is
+      children:
+        - title: "RAG vs Fine-tuning"
+          anchor: rag-vs-fine-tuning
+    - title: "RAG vs Large Context Windows"
+      anchor: rag-vs-large-context-windows
+      children:
+        - title: "Precision over Brute Force"
+          anchor: precision-over-brute-force
+        - title: "Cost and Latency"
+          anchor: cost-and-latency
+    - title: "The Smallest RAG Architecture"
+      anchor: the-smallest-rag-architecture
+      children:
+        - title: "Phase 1: Preparation"
+          anchor: phase-1-preparation
+        - title: "Phase 2: Answering"
+          anchor: phase-2-answering
+    - title: "Why Build It Locally"
+      anchor: why-build-it-locally
+    - title: "Document Parsing"
+      anchor: document-parsing
+      children:
+        - title: "Tools for Parsing"
+          anchor: tools-for-parsing
+    - title: "Chunking Strategies"
+      anchor: chunking-strategies
+      children:
+        - title: "Why Overlap Matters"
+          anchor: why-overlap-matters
+        - title: "Fixed-size Windows"
+          anchor: fixed-size-windows
+        - title: "Split by Headings"
+          anchor: split-by-headings
+        - title: "Recursive Splitting"
+          anchor: recursive-splitting
+    - title: "Embeddings Deep Dive"
+      anchor: embeddings-deep-dive
+      children:
+        - title: "Picking a Model"
+          anchor: picking-an-embedding-model
+        - title: "Key Concepts"
+          anchor: key-embedding-concepts
+    - title: "Vector Search and Retrieval"
+      anchor: vector-search-and-retrieval
+      children:
+        - title: "How FAISS Works"
+          anchor: how-faiss-works
+        - title: "Why Retrieval Quality Matters"
+          anchor: why-retrieval-quality-matters
+    - title: "Building the Pipeline"
+      anchor: building-the-pipeline
+      children:
+        - title: "The Full Code"
+          anchor: the-full-code
+    - title: "Prompt Engineering for RAG"
+      anchor: prompt-engineering-for-rag
+      children:
+        - title: "Four Rules"
+          anchor: four-rules-for-rag-prompts
+        - title: "Common Mistakes"
+          anchor: common-prompt-mistakes
+    - title: "Evaluation and Iteration"
+      anchor: evaluation-and-iteration
+      children:
+        - title: "Search Quality"
+          anchor: measuring-search-quality
+        - title: "Answer Quality"
+          anchor: measuring-answer-quality
+    - title: "Where RAG Falls Short"
+      anchor: where-rag-falls-short
+      children:
+        - title: "Math and Calculations"
+          anchor: math-and-calculations
+    - title: "Access Control in RAG"
+      anchor: access-control-in-rag
+      children:
+        - title: "How to Add It"
+          anchor: how-to-add-access-control
+    - title: "Hybrid RAG with Structured Data"
+      anchor: hybrid-rag-with-structured-data
+      children:
+        - title: "Question Routing"
+          anchor: question-routing
+        - title: "Questions to SQL"
+          anchor: questions-to-sql
+    - title: "Citations and Reducing Hallucination"
+      anchor: citations-and-reducing-hallucination
+      children:
+        - title: "How to Get Citations"
+          anchor: how-to-get-citations
+        - title: "Other Techniques"
+          anchor: other-hallucination-techniques
+    - title: "A Complete Worked Example"
+      anchor: a-complete-worked-example
+      children:
+        - title: "Build the Index"
+          anchor: example-build-index
+        - title: "Behind the Scenes"
+          anchor: example-behind-the-scenes
+    - title: "What's Next"
+      anchor: whats-next

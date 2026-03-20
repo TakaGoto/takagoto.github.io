@@ -1,0 +1,33 @@
+---
+layout: default
+title: Guides
+permalink: /guides/
+description: "Deep dives into AI development — multi-part guides covering RAG, agents, embeddings, and more."
+---
+
+<section class="guides-index">
+  <div class="guides-index-inner">
+    <p class="section-label">Deep Dives</p>
+    <h1 class="guides-index-title">Guides</h1>
+    <p class="guides-index-subtitle">Multi-part deep dives into AI development. Each guide builds a real system from first principles.</p>
+  </div>
+</section>
+
+<section class="guides-grid-section">
+  <div class="guides-grid">
+    {% for guide in site.data.guides %}
+    <a href="/guides/{{ guide.slug }}/" class="guide-card" style="--guide-accent: {{ guide.accent }}">
+      <div class="guide-card-header">
+        {% if guide.status == "in-progress" %}
+        <span class="badge badge-building">In Progress</span>
+        {% else %}
+        <span class="badge badge-live">Complete</span>
+        {% endif %}
+        <span class="guide-card-count">{{ guide.sections.size }} sections</span>
+      </div>
+      <h2 class="guide-card-title">{{ guide.name }}</h2>
+      <p class="guide-card-description">{{ guide.description }}</p>
+    </a>
+    {% endfor %}
+  </div>
+</section>

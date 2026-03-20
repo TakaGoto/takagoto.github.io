@@ -1,0 +1,85 @@
+---
+layout: default
+---
+
+{% assign guide = nil %}
+{% for g in site.data.guides %}
+  {% if g.slug == page.guide_slug %}
+    {% assign guide = g %}
+  {% endif %}
+{% endfor %}
+
+<section class="guide-hero" style="--guide-accent: {{ guide.accent }}">
+  <div class="guide-hero-inner">
+    <a href="/guides/" class="guide-back">&larr; All Guides</a>
+    <div class="guide-hero-meta">
+      {% if guide.status == "in-progress" %}
+      <span class="badge badge-building">In Progress</span>
+      {% else %}
+      <span class="badge badge-live">Complete</span>
+      {% endif %}
+    </div>
+    <h1 class="guide-hero-title">{{ guide.name }}</h1>
+    <p class="guide-hero-description">{{ guide.description }}</p>
+  </div>
+</section>
+
+<div class="guide-layout" style="--guide-accent: {{ guide.accent }}">
+  <aside class="guide-sidebar">
+    <nav class="guide-toc-nav">
+      <h3 class="guide-toc-heading">Table of Contents</h3>
+      <ul class="guide-toc-links">
+        {% for section in guide.sections %}
+        <li>
+          <a href="#{{ section.anchor }}" class="guide-toc-link" data-anchor="{{ section.anchor }}">{{ section.title }}</a>
+          {% if section.children %}
+          <ul class="guide-toc-children">
+            {% for child in section.children %}
+            <li>
+              <a href="#{{ child.anchor }}" class="guide-toc-link guide-toc-link--child" data-anchor="{{ child.anchor }}">{{ child.title }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </aside>
+
+  <article class="guide-article">
+    {{ content }}
+  </article>
+</div>
+
+<script>
+(function() {
+  var links = document.querySelectorAll('.guide-toc-link');
+  var headings = [];
+  links.forEach(function(link) {
+    var id = link.getAttribute('data-anchor');
+    var el = document.getElementById(id);
+    if (el) headings.push({ id: id, el: el });
+  });
+
+  function updateActive() {
+    var scrollTop = window.scrollY + 100;
+    var current = '';
+    for (var i = 0; i < headings.length; i++) {
+      if (headings[i].el.offsetTop <= scrollTop) {
+        current = headings[i].id;
+      }
+    }
+    links.forEach(function(link) {
+      if (link.getAttribute('data-anchor') === current) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+})();
+</script>
