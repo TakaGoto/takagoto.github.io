@@ -101,6 +101,26 @@ a.building-card {
   }
 }
 
+.building-card--placeholder {
+  border-style: dashed;
+  opacity: 0.45;
+  cursor: default;
+
+  &:hover {
+    border-color: var(--color-border);
+    transform: none;
+  }
+}
+
+.building-card-icon--placeholder {
+  background: var(--color-bg-subtle);
+  border-radius: var(--radius);
+}
+
+.building-card-name--placeholder {
+  color: var(--color-text-muted);
+}
+
 .building-card-icon {
   width: 40px;
   height: 40px;

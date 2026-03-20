@@ -35,6 +35,20 @@ layout: home
     </a>
     {% endif %}
     {% endfor %}
+    {% assign pad = building_count | modulo: 3 %}
+    {% if pad != 0 %}
+      {% assign placeholders = 3 | minus: pad %}
+      {% for i in (1..placeholders) %}
+      <div class="building-card building-card--placeholder">
+        <div class="building-card-icon building-card-icon--placeholder"></div>
+        <div class="building-card-info">
+          <span class="building-card-name building-card-name--placeholder">Coming soon</span>
+          <span class="badge badge-planned">PLANNING</span>
+          <p class="building-card-tagline">Next project in the pipeline</p>
+        </div>
+      </div>
+      {% endfor %}
+    {% endif %}
   </div>
 </section>
 
