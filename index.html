@@ -35,9 +35,9 @@ layout: home
     </a>
     {% endif %}
     {% endfor %}
-    {% assign pad = building_count | modulo: 3 %}
-    {% if pad != 0 %}
-      {% assign placeholders = 3 | minus: pad %}
+    {% assign total_target = 5 %}
+    {% if building_count < total_target %}
+      {% assign placeholders = total_target | minus: building_count %}
       {% for i in (1..placeholders) %}
       <div class="building-card building-card--placeholder">
         <div class="building-card-icon building-card-icon--placeholder"></div>
