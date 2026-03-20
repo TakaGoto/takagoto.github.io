@@ -13,7 +13,7 @@ layout: home
   <div class="home-building-grid">
     {% for app in site.data.apps %}
     {% if app.status == "building" %}
-    <div class="building-card">
+    <a href="/{{ app.slug }}/" class="building-card">
       <div class="building-card-icon">
         <img src="{{ app.icon | relative_url }}" alt="{{ app.name }} icon" />
       </div>
@@ -22,7 +22,7 @@ layout: home
         <span class="badge badge-building">Building</span>
         <p class="building-card-tagline">{{ app.tagline }}</p>
       </div>
-    </div>
+    </a>
     {% endif %}
     {% endfor %}
   </div>

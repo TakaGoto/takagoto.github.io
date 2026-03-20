@@ -55,6 +55,11 @@
   gap: var(--space-4);
 }
 
+a.building-card {
+  text-decoration: none;
+  color: inherit;
+}
+
 .building-card {
   background: var(--color-bg-raised);
   border: 1px solid var(--color-border);
@@ -63,10 +68,12 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  transition: border-color var(--transition);
+  transition: border-color var(--transition), transform var(--transition);
+  cursor: pointer;
 
   &:hover {
     border-color: var(--color-text-muted);
+    transform: translateY(-2px);
   }
 }
 
