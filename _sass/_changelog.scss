@@ -1,0 +1,67 @@
+// ============================================================
+// Changelog Page — ship log, reverse-chronological entries
+// ============================================================
+
+.changelog-hero {
+  padding: var(--space-16) var(--space-6) var(--space-12);
+}
+
+.changelog-hero-inner {
+  max-width: var(--page-width);
+  margin: 0 auto;
+}
+
+.changelog-title {
+  font-size: var(--text-4xl);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-3);
+
+  @media (max-width: 640px) {
+    font-size: var(--text-3xl);
+  }
+}
+
+.changelog-subtitle {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+}
+
+// --- Entries ---
+
+.changelog-entries {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--space-6) var(--space-16);
+}
+
+.changelog-entry {
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--color-border-light);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.changelog-date {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+}
+
+.changelog-entry-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin: 0 0 var(--space-1) 0;
+  line-height: 1.4;
+}
+
+.changelog-desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
