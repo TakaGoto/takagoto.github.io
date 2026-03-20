@@ -39,6 +39,30 @@
   color: var(--color-text-secondary);
   line-height: 1.6;
   max-width: 520px;
+  margin-bottom: var(--space-6);
+}
+
+.home-stats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.05em;
+
+  @media (max-width: 480px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.home-stat {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.home-stat-sep {
+  color: var(--color-text-muted);
 }
 
 // --- Currently Building ---

@@ -6,6 +6,16 @@ layout: home
   <p class="home-hero-label">TAKA GOTO</p>
   <h1 class="home-hero-title">Building in public. Shipping apps.</h1>
   <p class="home-hero-tagline">Solo dev designing, building, and shipping iOS and web apps from zero to production. Writing about the process along the way.</p>
+  {% assign live_count = 0 %}{% assign building_count = 0 %}{% for app in site.data.apps %}{% if app.status == "live" %}{% assign live_count = live_count | plus: 1 %}{% elsif app.status == "building" %}{% assign building_count = building_count | plus: 1 %}{% endif %}{% endfor %}
+  <div class="home-stats">
+    <span class="home-stat">{{ live_count }} LIVE</span>
+    <span class="home-stat-sep">/</span>
+    <span class="home-stat">{{ building_count }} BUILDING</span>
+    <span class="home-stat-sep">/</span>
+    <span class="home-stat">{{ site.posts.size }} POSTS</span>
+    <span class="home-stat-sep">/</span>
+    <span class="home-stat">{{ 'now' | date: '%Y' }}</span>
+  </div>
 </section>
 
 <section class="home-building">

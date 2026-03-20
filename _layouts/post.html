@@ -5,6 +5,8 @@ layout: default
 {% assign words = content | number_of_words %}
 {% assign reading_time = words | divided_by: 200 | plus: 1 %}
 
+<div class="reading-progress" id="reading-progress"></div>
+
 <article class="post">
   <header class="post-header">
     <div class="post-meta">
@@ -35,3 +37,15 @@ layout: default
 
   {% include post-nav.html %}
 </article>
+
+<script>
+(function() {
+  var bar = document.getElementById('reading-progress');
+  if (!bar) return;
+  window.addEventListener('scroll', function() {
+    var h = document.documentElement;
+    var pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  }, { passive: true });
+})();
+</script>
