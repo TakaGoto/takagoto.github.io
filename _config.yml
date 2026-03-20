@@ -1,19 +1,20 @@
 # Site settings
 title: Taka Goto
-description: Full Stack Dev | Esports Fanatic | Dog Lover
+description: Building in public. Shipping iOS apps.
 baseurl: ""
 url: "https://takagoto.github.io"
 github_username: TakaGoto
 
 # Build settings
 markdown: kramdown
-theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
 
 permalink: /blog/:title/
 excerpt_separator: "\n\n"
 
-# Only show these pages in the header navigation
+# Navigation
 header_pages:
+  - lab.html
   - about.md

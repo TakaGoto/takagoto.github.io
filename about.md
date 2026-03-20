@@ -4,16 +4,34 @@ title: About
 permalink: /about/
 ---
 
-Hey, I'm Taka — a full stack developer who loves building things from scratch and figuring out how stuff works under the hood.
+I'm Taka Goto. I build iOS apps and write about the craft.
 
-## What I'm Working On
+## The Stack
 
-I spend most of my time building mobile apps, experimenting with AI-powered dev tools, and writing about what I learn along the way. I'm especially interested in how AI is changing the way we write and ship code.
+```
+Expo / React Native
+SwiftUI
+TypeScript
+Supabase
+RevenueCat
+Claude Code
+```
 
-## About This Blog
+## The Apps
 
-This blog is where I share real experiences from building software — the bugs AI can't fix, the patterns that actually work, and the things nobody tells you until you hit them yourself.
+There are currently 7 live apps on the App Store, spanning everything from habit trackers to trading card tools. Each one started as a weekend idea and shipped as a real product.
+
+[See them all in the Lab](/lab/).
+
+## The Journey
+
+I build in public. Every app is shipped solo -- from design to App Store review. This site is where I write about what works, what breaks, and what I'd do differently next time.
+
+No team, no funding, no gatekeepers. Just code and curiosity.
 
 ## Connect
 
-You can find me on [GitHub](https://github.com/TakaGoto) and [LinkedIn](https://www.linkedin.com/in/TakaGoto).
+Find me online:
+
+- [GitHub](https://github.com/TakaGoto)
+- [LinkedIn](https://www.linkedin.com/in/TakaGoto)

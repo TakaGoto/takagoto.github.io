@@ -1,0 +1,21 @@
+---
+layout: default
+---
+
+<div class="tag-page">
+  <header class="tag-page-header">
+    <p class="section-label">Tag</p>
+    <h1 class="tag-page-title">{{ page.tag }}</h1>
+  </header>
+
+  <ul class="tag-posts">
+    {% for post in site.tags[page.tag] %}
+    <li class="tag-post-item">
+      <time class="tag-post-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+      <a class="tag-post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <a class="tag-back-link" href="/tags/">&larr; All tags</a>
+</div>

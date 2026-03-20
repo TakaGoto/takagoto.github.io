@@ -3,6 +3,7 @@ layout: post
 title: "What AI Won't Tell You About Building a Mobile App With It"
 date: 2026-01-26 12:00:00 -0600
 categories: ai mobile development
+tags: [ai, mobile, react-native, expo]
 author: Taka Goto
 description: "Real debugging stories from building a React Native app with AI — empty blobs, platform quirks, and the problems AI can't see."
 ---

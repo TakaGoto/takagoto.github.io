@@ -3,20 +3,41 @@ layout: home
 ---
 
 <section class="home-hero">
-  <h1 class="home-hero-title">Hello, I'm Taka!</h1>
-  <p class="home-hero-tagline">Full Stack Dev. Esports fanatic. Dog lover. Building things with code and curiosity.</p>
+  <p class="home-hero-label">TAKA GOTO</p>
+  <h1 class="home-hero-title">Building in public. Shipping iOS apps.</h1>
+  <p class="home-hero-tagline">Solo dev designing, building, and shipping iOS apps from zero to the App Store. Writing about the process along the way.</p>
+</section>
+
+<section class="home-building">
+  <h2 class="section-label">Currently Building</h2>
+  <div class="home-building-grid">
+    {% for app in site.data.apps %}
+    {% if app.status == "building" %}
+    <div class="building-card">
+      <div class="building-card-icon">
+        <img src="{{ app.icon | relative_url }}" alt="{{ app.name }} icon" />
+      </div>
+      <div class="building-card-info">
+        <span class="building-card-name">{{ app.name }}</span>
+        <span class="badge badge-building">Building</span>
+        <p class="building-card-tagline">{{ app.tagline }}</p>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
 </section>
 
 <section class="home-blog">
-  <h2 class="home-section-title">Recent Writing</h2>
+  <h2 class="section-label">Recent Writing</h2>
   {% for post in site.posts %}
   {% assign words = post.content | number_of_words %}
   {% assign reading_time = words | divided_by: 200 | plus: 1 %}
   <div class="blog-card">
     <div class="blog-card-meta">
-      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
-      <span class="blog-card-meta-separator">&middot;</span>
-      <span>{{ reading_time }} min read</span>
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
+      <span>/</span>
+      <span>{{ reading_time }} min</span>
     </div>
     <h3 class="blog-card-title">
       <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
@@ -27,3 +48,7 @@ layout: home
   </div>
   {% endfor %}
 </section>
+
+<div class="home-rss">
+  <a href="{{ '/feed.xml' | relative_url }}">Subscribe via RSS</a>
+</div>

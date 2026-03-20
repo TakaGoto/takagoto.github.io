@@ -1,0 +1,353 @@
+---
+layout: default
+title: Design System
+permalink: /design/
+---
+
+<section class="design-section">
+  <div class="design-section-inner">
+    <p class="section-label">Design System</p>
+    <h1>Design Tokens &amp; Components</h1>
+    <p class="design-intro">A living reference of every color, type scale, spacing unit, and component used across this site. All values are pulled from CSS custom properties so swatches update automatically with the theme toggle.</p>
+  </div>
+</section>
+
+<!-- =========================================================
+     COLORS
+     ========================================================= -->
+<section class="design-section">
+  <div class="design-section-inner">
+    <p class="section-label">Colors</p>
+    <h2>Primary</h2>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-preview" style="background: var(--color-primary);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Primary</span>
+          <code class="swatch-var">--color-primary</code>
+          <span class="swatch-values">Dark: #10B981 &middot; Light: #059669</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-preview" style="background: var(--color-primary-hover);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Primary Hover</span>
+          <code class="swatch-var">--color-primary-hover</code>
+          <span class="swatch-values">Dark: #34D399 &middot; Light: #047857</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-preview" style="background: var(--color-primary-dim);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Primary Dim</span>
+          <code class="swatch-var">--color-primary-dim</code>
+          <span class="swatch-values">Dark: rgba(16,185,129,0.12) &middot; Light: rgba(5,150,105,0.08)</span>
+        </div>
+      </div>
+    </div>
+
+    <h2>Backgrounds</h2>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-preview" style="background: var(--color-bg);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Background</span>
+          <code class="swatch-var">--color-bg</code>
+          <span class="swatch-values">Dark: #0F1117 &middot; Light: #FAFAF9</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-preview" style="background: var(--color-bg-raised);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Background Raised</span>
+          <code class="swatch-var">--color-bg-raised</code>
+          <span class="swatch-values">Dark: #161921 &middot; Light: #FFFFFF</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-preview" style="background: var(--color-bg-subtle);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Background Subtle</span>
+          <code class="swatch-var">--color-bg-subtle</code>
+          <span class="swatch-values">Dark: #1C1F2B &middot; Light: #F5F5F4</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-preview" style="background: var(--color-bg-code);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Background Code</span>
+          <code class="swatch-var">--color-bg-code</code>
+          <span class="swatch-values">Dark: #1E1E2E &middot; Light: #F4F5F7</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-preview" style="background: var(--color-nav-bg);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Nav Background</span>
+          <code class="swatch-var">--color-nav-bg</code>
+          <span class="swatch-values">Dark: rgba(15,17,23,0.85) &middot; Light: rgba(250,250,249,0.85)</span>
+        </div>
+      </div>
+    </div>
+
+    <h2>Text</h2>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-preview swatch-preview--text" style="background: var(--color-text);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Text</span>
+          <code class="swatch-var">--color-text</code>
+          <span class="swatch-values">Dark: #E8E6E3 &middot; Light: #1C1917</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-preview swatch-preview--text" style="background: var(--color-text-secondary);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Text Secondary</span>
+          <code class="swatch-var">--color-text-secondary</code>
+          <span class="swatch-values">Dark: #A8A29E &middot; Light: #57534E</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-preview swatch-preview--text" style="background: var(--color-text-muted);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Text Muted</span>
+          <code class="swatch-var">--color-text-muted</code>
+          <span class="swatch-values">Dark: #78716C &middot; Light: #A8A29E</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-preview swatch-preview--text" style="background: var(--color-code-text);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Code Text</span>
+          <code class="swatch-var">--color-code-text</code>
+          <span class="swatch-values">Dark: #CDD6F4 &middot; Light: #1C1917</span>
+        </div>
+      </div>
+    </div>
+
+    <h2>Borders</h2>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-preview swatch-preview--border" style="border-color: var(--color-border);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Border</span>
+          <code class="swatch-var">--color-border</code>
+          <span class="swatch-values">Dark: rgba(255,255,255,0.08) &middot; Light: #E7E5E4</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-preview swatch-preview--border" style="border-color: var(--color-border-light);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Border Light</span>
+          <code class="swatch-var">--color-border-light</code>
+          <span class="swatch-values">Dark: rgba(255,255,255,0.04) &middot; Light: #F5F5F4</span>
+        </div>
+      </div>
+    </div>
+
+    <h2>Status</h2>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-preview" style="background: var(--color-status-live);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Status Live</span>
+          <code class="swatch-var">--color-status-live</code>
+          <span class="swatch-values">Dark: #10B981 &middot; Light: #059669</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-preview" style="background: var(--color-status-building);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Status Building</span>
+          <code class="swatch-var">--color-status-building</code>
+          <span class="swatch-values">Dark: #F59E0B &middot; Light: #D97706</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-preview" style="background: var(--color-status-planned);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Status Planned</span>
+          <code class="swatch-var">--color-status-planned</code>
+          <span class="swatch-values">Dark: #78716C &middot; Light: #A8A29E</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     TYPOGRAPHY
+     ========================================================= -->
+<section class="design-section">
+  <div class="design-section-inner">
+    <p class="section-label">Typography</p>
+
+    <h2>Font Families</h2>
+    <div class="type-sample">
+      <div class="type-sample-row">
+        <span class="type-sample-label">Heading / Body</span>
+        <span class="type-sample-face" style="font-family: var(--font-heading);">Space Grotesk &mdash; ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789</span>
+      </div>
+      <div class="type-sample-row">
+        <span class="type-sample-label">Monospace</span>
+        <span class="type-sample-face" style="font-family: var(--font-mono);">JetBrains Mono &mdash; ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789</span>
+      </div>
+    </div>
+
+    <h2>Heading Scale</h2>
+    <div class="type-sample">
+      <div class="type-sample-heading">
+        <h1>h1 &mdash; The quick brown fox (2rem / text-3xl)</h1>
+      </div>
+      <div class="type-sample-heading">
+        <h2>h2 &mdash; The quick brown fox (1.5rem / text-2xl)</h2>
+      </div>
+      <div class="type-sample-heading">
+        <h3>h3 &mdash; The quick brown fox (1.25rem / text-xl)</h3>
+      </div>
+      <div class="type-sample-heading">
+        <h4>h4 &mdash; The quick brown fox (1.125rem / text-lg)</h4>
+      </div>
+    </div>
+
+    <h2>Body &amp; Sizes</h2>
+    <div class="type-sample">
+      <p style="font-size: var(--text-xl); margin-bottom: var(--space-3);">text-xl (1.25rem) &mdash; Body text for large intros and callouts.</p>
+      <p style="font-size: var(--text-lg); margin-bottom: var(--space-3);">text-lg (1.125rem) &mdash; Slightly larger body text for emphasis.</p>
+      <p style="font-size: var(--text-base); margin-bottom: var(--space-3);">text-base (1rem) &mdash; Default body text. The quick brown fox jumps over the lazy dog.</p>
+      <p style="font-size: var(--text-sm); margin-bottom: var(--space-3);">text-sm (0.875rem) &mdash; Secondary text for metadata and captions.</p>
+      <p style="font-size: var(--text-xs); margin-bottom: 0;">text-xs (0.75rem) &mdash; Small labels, badges, and fine print.</p>
+    </div>
+
+    <h2>Code</h2>
+    <div class="type-sample">
+      <p>Inline code: <code>const greeting = "Hello, world!";</code></p>
+      <pre><code>// Code block example
+function fibonacci(n) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SPACING
+     ========================================================= -->
+<section class="design-section">
+  <div class="design-section-inner">
+    <p class="section-label">Spacing</p>
+    <h2>Spacing Scale</h2>
+    <div class="spacing-scale">
+      <div class="spacing-row">
+        <code class="spacing-label">--space-1</code>
+        <div class="spacing-bar" style="width: var(--space-1);"></div>
+        <span class="spacing-value">0.25rem (4px)</span>
+      </div>
+      <div class="spacing-row">
+        <code class="spacing-label">--space-2</code>
+        <div class="spacing-bar" style="width: var(--space-2);"></div>
+        <span class="spacing-value">0.5rem (8px)</span>
+      </div>
+      <div class="spacing-row">
+        <code class="spacing-label">--space-3</code>
+        <div class="spacing-bar" style="width: var(--space-3);"></div>
+        <span class="spacing-value">0.75rem (12px)</span>
+      </div>
+      <div class="spacing-row">
+        <code class="spacing-label">--space-4</code>
+        <div class="spacing-bar" style="width: var(--space-4);"></div>
+        <span class="spacing-value">1rem (16px)</span>
+      </div>
+      <div class="spacing-row">
+        <code class="spacing-label">--space-5</code>
+        <div class="spacing-bar" style="width: var(--space-5);"></div>
+        <span class="spacing-value">1.25rem (20px)</span>
+      </div>
+      <div class="spacing-row">
+        <code class="spacing-label">--space-6</code>
+        <div class="spacing-bar" style="width: var(--space-6);"></div>
+        <span class="spacing-value">1.5rem (24px)</span>
+      </div>
+      <div class="spacing-row">
+        <code class="spacing-label">--space-8</code>
+        <div class="spacing-bar" style="width: var(--space-8);"></div>
+        <span class="spacing-value">2rem (32px)</span>
+      </div>
+      <div class="spacing-row">
+        <code class="spacing-label">--space-10</code>
+        <div class="spacing-bar" style="width: var(--space-10);"></div>
+        <span class="spacing-value">2.5rem (40px)</span>
+      </div>
+      <div class="spacing-row">
+        <code class="spacing-label">--space-12</code>
+        <div class="spacing-bar" style="width: var(--space-12);"></div>
+        <span class="spacing-value">3rem (48px)</span>
+      </div>
+      <div class="spacing-row">
+        <code class="spacing-label">--space-16</code>
+        <div class="spacing-bar" style="width: var(--space-16);"></div>
+        <span class="spacing-value">4rem (64px)</span>
+      </div>
+      <div class="spacing-row">
+        <code class="spacing-label">--space-20</code>
+        <div class="spacing-bar" style="width: var(--space-20);"></div>
+        <span class="spacing-value">5rem (80px)</span>
+      </div>
+      <div class="spacing-row">
+        <code class="spacing-label">--space-24</code>
+        <div class="spacing-bar" style="width: var(--space-24);"></div>
+        <span class="spacing-value">6rem (96px)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     COMPONENTS
+     ========================================================= -->
+<section class="design-section">
+  <div class="design-section-inner">
+    <p class="section-label">Components</p>
+
+    <h2>Badges</h2>
+    <div class="component-demo">
+      <span class="badge badge-live">Live</span>
+      <span class="badge badge-building">Building</span>
+      <span class="badge badge-planned">Planned</span>
+    </div>
+
+    <h2>Tag Pills</h2>
+    <div class="component-demo">
+      <span class="tag-pill">TypeScript</span>
+      <span class="tag-pill">React Native</span>
+      <span class="tag-pill">SwiftUI</span>
+      <span class="tag-pill">Supabase</span>
+      <span class="tag-pill">Expo</span>
+    </div>
+
+    <h2>Buttons</h2>
+    <div class="component-demo">
+      <button class="btn btn-primary">Primary Button</button>
+      <button class="btn btn-ghost">Ghost Button</button>
+    </div>
+
+    <h2>Section Labels</h2>
+    <div class="component-demo">
+      <p class="section-label" style="margin-bottom: 0;">Section Label</p>
+    </div>
+
+    <h2>Inline Code</h2>
+    <div class="component-demo">
+      <p style="margin-bottom: 0;">Run <code>npm install</code> to get started, then <code>npx expo start</code> for the dev server.</p>
+    </div>
+
+    <h2>Blockquote</h2>
+    <div class="component-demo">
+      <blockquote>
+        <p>Good design is as little design as possible. Less, but better, because it concentrates on the essential aspects.</p>
+      </blockquote>
+    </div>
+  </div>
+</section>

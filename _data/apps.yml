@@ -1,0 +1,162 @@
+- name: Ace
+  slug: ace
+  tagline: "AI-powered card pre-grading. Snap a photo, get an instant condition breakdown."
+  status: live
+  accent: "#ff6a00"
+  category: trading-cards
+  app_store_url: "https://apps.apple.com/us/app/ace-optcg-pregrading/id6758323301"
+  icon: /ace/icon.png
+  features:
+    - Photograph card front and back
+    - AI condition scoring (corners, edges, centering, surface)
+    - Grade predictions (PSA/BGS scales)
+    - Track portfolio and submission history
+
+- name: Drifter
+  slug: drifter
+  tagline: "Mix custom sleep sounds. Save your perfect blend. Drift off."
+  status: live
+  accent: "#7c5cfc"
+  category: health
+  app_store_url: "https://apps.apple.com/us/app/drifter-sleep-sounds-mixer/id6758837026"
+  icon: /drifter/icon.png
+  features:
+    - Mix and layer ambient sounds
+    - Sleep timer with fade out
+    - Save and manage favorite mixes
+    - Background playback (screen off)
+
+- name: GreenWeek
+  slug: greenweek
+  tagline: "Your plant care journal. Frost alerts, planting phases, and care reminders."
+  status: live
+  accent: "#4caf50"
+  category: gardening
+  app_store_url: "https://apps.apple.com/us/app/greenweek/id6758999970"
+  icon: /greenweek/icon.png
+  features:
+    - Frost date detection by zip code
+    - Track planting phases (indoor, transplant, harvest)
+    - Care reminders via push notifications
+    - iCloud sync across all your devices
+
+- name: Loki
+  slug: loki
+  tagline: "TCG finance and match tracker. Log trades, track wins, analyze your game."
+  status: live
+  accent: "#14b8a6"
+  category: trading-cards
+  app_store_url: "https://apps.apple.com/us/app/loki-optcg-buddy/id6758023975"
+  icon: /loki/icon.png
+  features:
+    - Log match results and deck performance
+    - Track trade history and card values
+    - Win rate analytics and trends
+    - iCloud sync across devices
+
+- name: Pulse
+  slug: pulse
+  tagline: "Build better habits. Track daily, build streaks, see your progress."
+  status: live
+  accent: "#10b981"
+  category: productivity
+  app_store_url: "https://apps.apple.com/us/app/pulse-minimal-habit-tracker/id6758865997"
+  icon: /pulse/icon.png
+  features:
+    - Daily habit tracking with streaks
+    - Visual progress calendars
+    - Customizable habit schedules
+    - iCloud sync across devices
+
+- name: Typr
+  slug: typr
+  tagline: "Typing speed tests. Track your WPM, build streaks, get faster."
+  status: live
+  accent: "#f43f5e"
+  category: productivity
+  app_store_url: "https://apps.apple.com/us/app/typr-typing-speed-test/id6758866821"
+  icon: /typr/icon.png
+  features:
+    - Typing speed and accuracy tests
+    - WPM tracking with history
+    - Daily streaks and personal bests
+    - Multiple difficulty levels
+
+- name: WickLog
+  slug: wicklog
+  tagline: "Candle maker's tracker. Batches, burn tests, recipes, and curing times."
+  status: live
+  accent: "#f5a623"
+  category: crafts
+  app_store_url: "https://apps.apple.com/us/app/wicklog-candle-tracker/id6759010904"
+  icon: /wicklog/icon.png
+  features:
+    - Track batches and recipes
+    - Burn test logging with timers
+    - Curing time countdowns
+    - iCloud sync across devices
+
+- name: Palettes
+  slug: palettes
+  tagline: "Extract color palettes from any photo. Copy in HEX, RGB, or HSL."
+  status: building
+  accent: "#f97316"
+  category: design
+  icon: /palettes/icon.png
+  features:
+    - Extract colors from photos
+    - Copy in HEX, RGB, or HSL
+    - Save and organize palettes
+    - Share palettes with others
+
+- name: Plantwise
+  slug: plantwise
+  tagline: "Your AI plant doctor. Snap a photo, get a diagnosis and treatment plan."
+  status: building
+  accent: "#2d6a4f"
+  category: gardening
+  icon: /plantwise/icon.png
+  features:
+    - AI-powered plant identification
+    - Disease and pest diagnosis
+    - Treatment recommendations
+    - Care schedule suggestions
+
+- name: Punchcard
+  slug: punchcard
+  tagline: "Shift tracker for hourly workers. Log hours, track earnings, stay organized."
+  status: building
+  accent: "#10b981"
+  category: productivity
+  icon: /punchcard/icon.png
+  features:
+    - Clock in/out with one tap
+    - Track hours and earnings
+    - Export timesheets
+    - Multiple job support
+
+- name: TankSheet
+  slug: tanksheet
+  tagline: "Aquarium maintenance tracker. Schedule care, log parameters, keep fish healthy."
+  status: building
+  accent: "#00bcd4"
+  category: pets
+  icon: /tanksheet/icon.png
+  features:
+    - Water parameter logging
+    - Maintenance schedule reminders
+    - Multiple tank support
+    - iCloud sync across devices
+
+- name: ShotNotes
+  slug: shotnotes
+  tagline: "Speak it. Bill it. Voice memos become session notes and invoices."
+  status: planned
+  accent: "#e94560"
+  category: productivity
+  icon: /shotnotes/icon.png
+  features:
+    - Voice-to-text session notes
+    - Auto-generate invoices
+    - Client management
+    - Export and share

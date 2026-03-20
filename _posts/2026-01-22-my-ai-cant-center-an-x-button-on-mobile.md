@@ -3,6 +3,7 @@ layout: post
 title: "My AI Can't Center an X Button on Mobile"
 date: 2026-01-22 12:00:00 -0600
 categories: ai mobile development
+tags: [ai, mobile, react-native, ui]
 author: Taka Goto
 description: "AI coding tools get mobile UI wrong in predictable ways. Here's what I've learned about their blind spots with touch targets, safe areas, and thumb ergonomics."
 ---

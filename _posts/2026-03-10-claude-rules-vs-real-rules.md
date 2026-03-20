@@ -3,6 +3,7 @@ layout: post
 title: "CLAUDE.md Rules vs Real Guardrails"
 date: 2026-03-10
 categories: [ai, dev-workflow]
+tags: [ai, claude-code, workflow, developer-tools]
 excerpt: "Prompt rules are useful, but hooks, branch protections, and CI are still the real guardrails."
 ---
 

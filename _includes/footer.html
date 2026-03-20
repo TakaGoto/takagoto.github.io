@@ -1,11 +1,16 @@
 <footer class="site-footer">
   <div class="footer-inner">
+    <div class="footer-brand">&copy; {{ site.time | date: '%Y' }} taka.goto</div>
     <div class="footer-links">
-      <a href="https://github.com/TakaGoto" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://www.linkedin.com/in/TakaGoto" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-    <div class="footer-copyright">
-      &copy; {{ site.time | date: '%Y' }} Taka Goto
+      {% if site.data.social %}
+        {% for link in site.data.social %}
+          <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.name }}</a>
+        {% endfor %}
+      {% else %}
+        <a href="https://github.com/TakaGoto" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/TakaGoto" target="_blank" rel="noopener">LinkedIn</a>
+      {% endif %}
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
     </div>
   </div>
 </footer>

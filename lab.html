@@ -1,0 +1,70 @@
+---
+layout: default
+title: Lab
+permalink: /lab/
+---
+
+{% assign live_apps = site.data.apps | where: "status", "live" %}
+{% assign building_apps = site.data.apps | where: "status", "building" %}
+{% assign planned_apps = site.data.apps | where: "status", "planned" %}
+
+<section class="lab-hero">
+  <div class="lab-hero-inner">
+    <p class="section-label">Lab</p>
+    <h1 class="lab-title">Apps I'm building</h1>
+    <p class="lab-subtitle">iOS apps built with Expo, React Native, and SwiftUI. All shipped by one person.</p>
+    <div class="lab-stats">
+      <div class="lab-stat">
+        <span class="lab-stat-number mono">{{ live_apps.size }}</span>
+        <span class="lab-stat-label mono">LIVE</span>
+      </div>
+      <div class="lab-stat">
+        <span class="lab-stat-number mono">{{ building_apps.size }}</span>
+        <span class="lab-stat-label mono">BUILDING</span>
+      </div>
+      <div class="lab-stat">
+        <span class="lab-stat-number mono">{{ planned_apps.size }}</span>
+        <span class="lab-stat-label mono">PLANNED</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if live_apps.size > 0 %}
+<section class="lab-section">
+  <div class="lab-section-inner">
+    <h2 class="section-label">Live on the App Store</h2>
+    <div class="app-grid">
+      {% for app in live_apps %}
+        {% include app-card.html app=app %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if building_apps.size > 0 %}
+<section class="lab-section">
+  <div class="lab-section-inner">
+    <h2 class="section-label">Currently Building</h2>
+    <div class="app-grid">
+      {% for app in building_apps %}
+        {% include app-card.html app=app %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if planned_apps.size > 0 %}
+<section class="lab-section">
+  <div class="lab-section-inner">
+    <h2 class="section-label">Planned</h2>
+    <div class="app-grid">
+      {% for app in planned_apps %}
+        {% include app-card.html app=app %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
