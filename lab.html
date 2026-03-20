@@ -5,6 +5,7 @@ permalink: /lab/
 ---
 
 {% assign live_apps = site.data.apps | where: "status", "live" %}
+{% assign improving_apps = site.data.apps | where: "status", "improving" %}
 {% assign building_apps = site.data.apps | where: "status", "building" %}
 {% assign planned_apps = site.data.apps | where: "status", "planned" %}
 
@@ -17,6 +18,10 @@ permalink: /lab/
       <div class="lab-stat">
         <span class="lab-stat-number mono">{{ live_apps.size }}</span>
         <span class="lab-stat-label mono">LIVE</span>
+      </div>
+      <div class="lab-stat">
+        <span class="lab-stat-number mono">{{ improving_apps.size }}</span>
+        <span class="lab-stat-label mono">IMPROVING</span>
       </div>
       <div class="lab-stat">
         <span class="lab-stat-number mono">{{ building_apps.size }}</span>
@@ -49,6 +54,19 @@ permalink: /lab/
     <h2 class="section-label">Currently Building</h2>
     <div class="app-grid">
       {% for app in building_apps %}
+        {% include app-card.html app=app %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if improving_apps.size > 0 %}
+<section class="lab-section">
+  <div class="lab-section-inner">
+    <h2 class="section-label">Improving</h2>
+    <div class="app-grid">
+      {% for app in improving_apps %}
         {% include app-card.html app=app %}
       {% endfor %}
     </div>

@@ -10,6 +10,8 @@
         <span class="badge badge-live">LIVE</span>
       {% elsif app.status == 'building' %}
         <span class="badge badge-building">BUILDING</span>
+      {% elsif app.status == 'improving' %}
+        <span class="badge badge-improving">IMPROVING</span>
       {% else %}
         <span class="badge badge-planned">PLANNED</span>
       {% endif %}

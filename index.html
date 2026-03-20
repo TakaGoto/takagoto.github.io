@@ -3,23 +3,48 @@ layout: home
 ---
 
 <section class="home-hero">
-  <p class="home-hero-label">TAKA GOTO</p>
-  <h1 class="home-hero-title">Building in public. Shipping apps.</h1>
-  <p class="home-hero-tagline">Solo dev designing, building, and shipping iOS and web apps from zero to production. Writing about the process along the way.</p>
-  {% assign live_count = 0 %}{% assign building_count = 0 %}{% for app in site.data.apps %}{% if app.status == "live" %}{% assign live_count = live_count | plus: 1 %}{% elsif app.status == "building" %}{% assign building_count = building_count | plus: 1 %}{% endif %}{% endfor %}
-  <div class="home-stats">
-    <span class="home-stat">{{ live_count }} LIVE</span>
-    <span class="home-stat-sep">/</span>
-    <span class="home-stat">{{ building_count }} BUILDING</span>
-    <span class="home-stat-sep">/</span>
-    <span class="home-stat">{{ site.posts.size }} POSTS</span>
-    <span class="home-stat-sep">/</span>
-    <span class="home-stat">{{ 'now' | date: '%Y' }}</span>
+  <div class="home-hero-row">
+    <div class="home-hero-content">
+      <p class="home-hero-label">TAKA GOTO</p>
+      <h1 class="home-hero-title">Building in public. Shipping apps.</h1>
+      <p class="home-hero-tagline">Solo dev designing, building, and shipping iOS and web apps from zero to production. Writing about the process along the way.</p>
+      {% assign live_count = 0 %}{% assign building_count = 0 %}{% assign improving_count = 0 %}{% for app in site.data.apps %}{% if app.status == "live" %}{% assign live_count = live_count | plus: 1 %}{% elsif app.status == "building" %}{% assign building_count = building_count | plus: 1 %}{% elsif app.status == "improving" %}{% assign improving_count = improving_count | plus: 1 %}{% endif %}{% endfor %}
+      <div class="home-stats">
+        <span class="home-stat">{{ live_count }} LIVE</span>
+        <span class="home-stat-sep">/</span>
+        <span class="home-stat">{{ improving_count }} IMPROVING</span>
+        <span class="home-stat-sep">/</span>
+        <span class="home-stat">{{ building_count }} BUILDING</span>
+        <span class="home-stat-sep">/</span>
+        <span class="home-stat">{{ site.data.guides.size }} GUIDES</span>
+        <span class="home-stat-sep">/</span>
+        <span class="home-stat">{{ site.posts.size }} POSTS</span>
+        <span class="home-stat-sep">/</span>
+        <span class="home-stat">{{ 'now' | date: '%Y' }}</span>
+      </div>
+    </div>
+    <div class="home-hero-chat">
+      <h2 class="section-label">Ask Me Anything</h2>
+      <div class="chat-box" id="chat-box">
+        <div class="chat-messages" id="chat-messages">
+          <div class="chat-msg chat-msg--ai">Hey! I'm Taka's AI assistant. Ask me anything about his projects, tech stack, or what he's working on.</div>
+        </div>
+        <form class="chat-input-form" id="chat-form">
+          <div class="chat-input-wrap">
+            <input type="text" class="chat-input" id="chat-input" placeholder="Ask a question..." maxlength="300" autocomplete="off" />
+            <span class="chat-char-count" id="chat-char-count">300</span>
+          </div>
+          <button type="submit" class="chat-send" id="chat-send">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="home-building">
-  <h2 class="section-label">Currently Building</h2>
+  <h2 class="section-label">Currently Working On</h2>
   <div class="home-building-grid">
     {% for app in site.data.apps %}
     {% if app.status == "building" %}
@@ -35,9 +60,24 @@ layout: home
     </a>
     {% endif %}
     {% endfor %}
+    {% for app in site.data.apps %}
+    {% if app.status == "improving" %}
+    <a href="/{{ app.slug }}/" class="building-card">
+      <div class="building-card-icon">
+        <img src="{{ app.icon | relative_url }}" alt="{{ app.name }} icon" />
+      </div>
+      <div class="building-card-info">
+        <span class="building-card-name">{{ app.name }}</span>
+        <span class="badge badge-improving">Improving</span>
+        <p class="building-card-tagline">{{ app.tagline }}</p>
+      </div>
+    </a>
+    {% endif %}
+    {% endfor %}
+    {% assign active_count = building_count | plus: improving_count %}
     {% assign total_target = 5 %}
-    {% if building_count < total_target %}
-      {% assign placeholders = total_target | minus: building_count %}
+    {% if active_count < total_target %}
+      {% assign placeholders = total_target | minus: active_count %}
       {% for i in (1..placeholders) %}
       <div class="building-card building-card--placeholder">
         <div class="building-card-icon building-card-icon--placeholder"></div>
@@ -49,6 +89,26 @@ layout: home
       </div>
       {% endfor %}
     {% endif %}
+  </div>
+</section>
+
+<section class="home-guides">
+  <h2 class="section-label">Deep Dives</h2>
+  <div class="home-guides-grid">
+    {% for guide in site.data.guides %}
+    <a href="/guides/{{ guide.slug }}/" class="guide-card" style="--guide-accent: {{ guide.accent }}">
+      <div class="guide-card-header">
+        {% if guide.status == "in-progress" %}
+        <span class="badge badge-building">In Progress</span>
+        {% else %}
+        <span class="badge badge-live">Complete</span>
+        {% endif %}
+        <span class="guide-card-count">{{ guide.sections.size }} sections</span>
+      </div>
+      <h2 class="guide-card-title">{{ guide.name }}</h2>
+      <p class="guide-card-description">{{ guide.description }}</p>
+    </a>
+    {% endfor %}
   </div>
 </section>
 

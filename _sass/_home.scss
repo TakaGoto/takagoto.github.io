@@ -3,13 +3,39 @@
 // ============================================================
 
 .home-hero {
-  max-width: var(--content-width);
+  max-width: var(--page-width);
   margin: 0 auto;
   padding: var(--space-24) var(--space-6) var(--space-16);
 
   @media (max-width: 640px) {
     padding-top: var(--space-16);
     padding-bottom: var(--space-12);
+  }
+}
+
+.home-hero-row {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: var(--space-10);
+  align-items: start;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+}
+
+.home-hero-content {
+  max-width: var(--content-width);
+}
+
+.home-hero-chat {
+  .section-label {
+    margin-bottom: var(--space-3);
+  }
+
+  @media (max-width: 900px) {
+    max-width: 480px;
   }
 }
 
@@ -150,6 +176,24 @@ a.building-card {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+// --- Deep Dives section ---
+
+.home-guides {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 0 var(--space-6) var(--space-16);
+}
+
+.home-guides-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-6);
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 // --- Blog section ---

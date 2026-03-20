@@ -18,9 +18,10 @@
   --color-border-light:   rgba(255, 255, 255, 0.04);
   --color-code-text:      #CDD6F4;
   --color-nav-bg:         rgba(15, 17, 23, 0.85);
-  --color-status-live:    #10B981;
-  --color-status-building:#F59E0B;
-  --color-status-planned: #78716C;
+  --color-status-live:      #10B981;
+  --color-status-building:  #F59E0B;
+  --color-status-improving: #3B82F6;
+  --color-status-planned:   #78716C;
 }
 
 // --- Light theme overrides ---
@@ -39,9 +40,10 @@
   --color-border-light:   #F5F5F4;
   --color-code-text:      #1C1917;
   --color-nav-bg:         rgba(250, 250, 249, 0.85);
-  --color-status-live:    #059669;
-  --color-status-building:#D97706;
-  --color-status-planned: #A8A29E;
+  --color-status-live:      #059669;
+  --color-status-building:  #D97706;
+  --color-status-improving: #2563EB;
+  --color-status-planned:   #A8A29E;
 }
 
 // --- Typography ---

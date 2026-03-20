@@ -43,7 +43,7 @@
 - name: Loki
   slug: loki
   tagline: "TCG finance and match tracker. Log trades, track wins, analyze your game."
-  status: live
+  status: improving
   accent: "#14b8a6"
   category: trading-cards
   app_store_url: "https://apps.apple.com/us/app/loki-optcg-buddy/id6758023975"
@@ -85,7 +85,7 @@
 - name: WickLog
   slug: wicklog
   tagline: "Candle maker's tracker. Batches, burn tests, recipes, and curing times."
-  status: live
+  status: improving
   accent: "#f5a623"
   category: crafts
   app_store_url: "https://apps.apple.com/us/app/wicklog-candle-tracker/id6759010904"
