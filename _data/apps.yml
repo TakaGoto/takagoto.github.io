@@ -96,25 +96,62 @@
     - Curing time countdowns
     - iCloud sync across devices
 
-- name: Palettes
-  slug: palettes
-  tagline: "Extract color palettes from any photo. Copy in HEX, RGB, or HSL."
-  status: building
-  accent: "#f97316"
-  category: design
-  icon: /palettes/icon.png
+- name: Panku Records
+  slug: pankurecords
+  tagline: "AI-powered tools for One Piece TCG — card search, price tracking, quizzes, and events."
+  status: live
+  accent: "#6366F1"
+  category: web
+  web_url: "https://www.pankurecords.com"
+  icon: /assets/img/pankurecords-icon.png
   features:
-    - Extract colors from photos
-    - Copy in HEX, RGB, or HSL
-    - Save and organize palettes
-    - Share palettes with others
+    - "Xebec: AI-powered card search with natural language"
+    - "Joyboy: Real-time price tracker with top movers"
+    - "Color Compass: Playstyle quiz to find your color"
+    - "Foxy: TCG archetype quiz (Player, Collector, or Scalper?)"
+    - "B: Browse TCG+ events across North America"
+  sub_apps:
+    - name: Xebec
+      tagline: AI-Powered Card Search
+      url: "https://www.pankurecords.com/xebec"
+      accent: "#6366F1"
+    - name: Joyboy
+      tagline: Price Tracker
+      url: "https://www.pankurecords.com/joyboy"
+      accent: "#22C55E"
+    - name: Color Compass
+      tagline: Find Your Color
+      url: "https://www.pankurecords.com/color_compass"
+      accent: "#A855F7"
+    - name: Foxy
+      tagline: Archetype Quiz
+      url: "https://www.pankurecords.com/foxy"
+      accent: "#F97316"
+    - name: B
+      tagline: TCG+ Events
+      url: "https://b-delta-six.vercel.app/events"
+      accent: "#F43F5E"
+
+- name: CrystalLens
+  slug: crystallens
+  tagline: "Identify crystals and minerals with AI. Snap a photo, get instant identification."
+  status: building
+  accent: "#8B5CF6"
+  category: education
+  icon: /crystallens/icon.png
+  features:
+    - AI-powered crystal and mineral identification
+    - Detailed mineral properties and metaphysical attributes
+    - Collection management and tracking
+    - Apple Sign In for cloud sync
 
 - name: Plantwise
   slug: plantwise
   tagline: "Your AI plant doctor. Snap a photo, get a diagnosis and treatment plan."
-  status: building
+  status: live
   accent: "#2d6a4f"
   category: gardening
+  app_store_url: "https://apps.apple.com/us/app/plantwise-plant-doctor-ai/id6759676800"
   icon: /plantwise/icon.png
   features:
     - AI-powered plant identification
@@ -122,41 +159,3 @@
     - Treatment recommendations
     - Care schedule suggestions
 
-- name: Punchcard
-  slug: punchcard
-  tagline: "Shift tracker for hourly workers. Log hours, track earnings, stay organized."
-  status: building
-  accent: "#10b981"
-  category: productivity
-  icon: /punchcard/icon.png
-  features:
-    - Clock in/out with one tap
-    - Track hours and earnings
-    - Export timesheets
-    - Multiple job support
-
-- name: TankSheet
-  slug: tanksheet
-  tagline: "Aquarium maintenance tracker. Schedule care, log parameters, keep fish healthy."
-  status: building
-  accent: "#00bcd4"
-  category: pets
-  icon: /tanksheet/icon.png
-  features:
-    - Water parameter logging
-    - Maintenance schedule reminders
-    - Multiple tank support
-    - iCloud sync across devices
-
-- name: ShotNotes
-  slug: shotnotes
-  tagline: "Speak it. Bill it. Voice memos become session notes and invoices."
-  status: planned
-  accent: "#e94560"
-  category: productivity
-  icon: /shotnotes/icon.png
-  features:
-    - Voice-to-text session notes
-    - Auto-generate invoices
-    - Client management
-    - Export and share

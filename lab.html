@@ -11,8 +11,8 @@ permalink: /lab/
 <section class="lab-hero">
   <div class="lab-hero-inner">
     <p class="section-label">Lab</p>
-    <h1 class="lab-title">Apps I'm building</h1>
-    <p class="lab-subtitle">iOS apps built with Expo, React Native, and SwiftUI. All shipped by one person.</p>
+    <h1 class="lab-title">Things I'm building</h1>
+    <p class="lab-subtitle">iOS apps, web platforms, and tools — built with Expo, SwiftUI, and Next.js. All shipped by one person.</p>
     <div class="lab-stats">
       <div class="lab-stat">
         <span class="lab-stat-number mono">{{ live_apps.size }}</span>
@@ -33,7 +33,7 @@ permalink: /lab/
 {% if live_apps.size > 0 %}
 <section class="lab-section">
   <div class="lab-section-inner">
-    <h2 class="section-label">Live on the App Store</h2>
+    <h2 class="section-label">Live</h2>
     <div class="app-grid">
       {% for app in live_apps %}
         {% include app-card.html app=app %}

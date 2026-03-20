@@ -1,0 +1,177 @@
+---
+layout: default
+title: "Panku Records — One Piece TCG Tools"
+description: "AI-powered tools for One Piece TCG — card search, price tracking, playstyle quizzes, and event discovery."
+---
+
+<style>
+  .panku-hero {
+    text-align: center;
+    padding: var(--space-16) var(--space-6) var(--space-8);
+  }
+  .panku-hero-inner {
+    max-width: var(--page-width);
+    margin: 0 auto;
+  }
+  .panku-icon {
+    width: 120px;
+    height: 120px;
+    border-radius: 28px;
+    margin: 0 auto var(--space-6);
+    box-shadow: 0 8px 32px rgba(99, 102, 241, 0.25);
+  }
+  .panku-title {
+    font-size: var(--text-4xl);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-3);
+  }
+  .panku-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    max-width: 540px;
+    margin: 0 auto var(--space-4);
+    line-height: 1.6;
+  }
+  .panku-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-primary);
+    background: var(--color-primary-dim);
+    padding: 0.3em 0.8em;
+    border-radius: 999px;
+    margin-bottom: var(--space-8);
+  }
+  .panku-apps {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 0 var(--space-6) var(--space-12);
+  }
+  .panku-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-4);
+  }
+  .panku-app-card {
+    display: block;
+    background: var(--color-bg-raised);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--transition), transform var(--transition);
+  }
+  .panku-app-card:hover {
+    border-color: var(--card-accent);
+    transform: translateY(-2px);
+  }
+  .panku-app-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--card-accent);
+    display: inline-block;
+    margin-right: var(--space-2);
+  }
+  .panku-app-name {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    margin-bottom: var(--space-1);
+  }
+  .panku-app-tagline {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-3);
+  }
+  .panku-app-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin-bottom: var(--space-4);
+  }
+  .panku-app-cta {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--card-accent);
+  }
+  .panku-visit {
+    text-align: center;
+    padding: 0 var(--space-6) var(--space-16);
+  }
+  .panku-visit a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: #6366F1;
+    color: #fff;
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    font-size: var(--text-base);
+    transition: opacity var(--transition);
+  }
+  .panku-visit a:hover { opacity: 0.85; color: #fff; }
+</style>
+
+<section class="panku-hero">
+  <div class="panku-hero-inner">
+    <img class="panku-icon" src="/pankurecords/icon.png" alt="Panku Records">
+    <h1 class="panku-title">Panku Records</h1>
+    <p class="panku-subtitle">AI-powered tools for One Piece TCG — card search, price tracking, playstyle quizzes, and event discovery.</p>
+    <span class="panku-badge">Free &middot; No Ads &middot; No Account Needed</span>
+  </div>
+</section>
+
+<section class="panku-apps">
+  <p class="section-label">Apps</p>
+  <div class="panku-grid">
+
+    <a href="https://www.pankurecords.com/xebec" class="panku-app-card" style="--card-accent: #6366F1" target="_blank" rel="noopener">
+      <div class="panku-app-name"><span class="panku-app-dot"></span>Xebec</div>
+      <div class="panku-app-tagline">AI-Powered Card Search</div>
+      <p class="panku-app-desc">Search One Piece TCG cards using natural language. Find cards by color, cost, power, effects, and more.</p>
+      <span class="panku-app-cta">Launch App &rarr;</span>
+    </a>
+
+    <a href="https://www.pankurecords.com/joyboy" class="panku-app-card" style="--card-accent: #22C55E" target="_blank" rel="noopener">
+      <div class="panku-app-name"><span class="panku-app-dot"></span>Joyboy</div>
+      <div class="panku-app-tagline">Price Tracker</div>
+      <p class="panku-app-desc">Track the biggest price movements in the One Piece TCG market. See top gainers and losers in the last 24 hours.</p>
+      <span class="panku-app-cta">Launch App &rarr;</span>
+    </a>
+
+    <a href="https://www.pankurecords.com/color_compass" class="panku-app-card" style="--card-accent: #A855F7" target="_blank" rel="noopener">
+      <div class="panku-app-name"><span class="panku-app-dot"></span>Color Compass</div>
+      <div class="panku-app-tagline">Find Your Color</div>
+      <p class="panku-app-desc">Take a quick questionnaire to discover which One Piece TCG color matches your playstyle.</p>
+      <span class="panku-app-cta">Launch App &rarr;</span>
+    </a>
+
+    <a href="https://www.pankurecords.com/foxy" class="panku-app-card" style="--card-accent: #F97316" target="_blank" rel="noopener">
+      <div class="panku-app-name"><span class="panku-app-dot"></span>Foxy</div>
+      <div class="panku-app-tagline">Archetype Quiz</div>
+      <p class="panku-app-desc">Discover your hobby archetype — are you a Player, Collector, or Scalper? Take the quiz and find out.</p>
+      <span class="panku-app-cta">Launch App &rarr;</span>
+    </a>
+
+    <a href="https://b-delta-six.vercel.app/events" class="panku-app-card" style="--card-accent: #F43F5E" target="_blank" rel="noopener">
+      <div class="panku-app-name"><span class="panku-app-dot"></span>B</div>
+      <div class="panku-app-tagline">TCG+ Events</div>
+      <p class="panku-app-desc">Browse and track Bandai TCG+ trading card game events near you across North America.</p>
+      <span class="panku-app-cta">Launch App &rarr;</span>
+    </a>
+
+  </div>
+</section>
+
+<div class="panku-visit">
+  <a href="https://www.pankurecords.com" target="_blank" rel="noopener">
+    Visit pankurecords.com &rarr;
+  </a>
+</div>

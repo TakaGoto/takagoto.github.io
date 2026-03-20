@@ -1,15 +1,35 @@
 # Site settings
 title: Taka Goto
-description: Building in public. Shipping iOS apps.
+description: Building in public. Shipping apps.
 baseurl: ""
 url: "https://takagoto.github.io"
 github_username: TakaGoto
+
+# Author (used by jekyll-seo-tag)
+author:
+  name: Taka Goto
+  url: "https://takagoto.github.io"
+
+# Social (used by jekyll-seo-tag for JSON-LD)
+social:
+  name: Taka Goto
+  links:
+    - https://github.com/TakaGoto
+    - https://www.linkedin.com/in/TakaGoto
+
+# Default OG image
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/img/og-default.png
 
 # Build settings
 markdown: kramdown
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
 
 permalink: /blog/:title/
 excerpt_separator: "\n\n"

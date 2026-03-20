@@ -8,8 +8,6 @@ author: Taka Goto
 description: "How I built six apps with Claude Code and evolved from conversational coding to a fully automated development pipeline with sub-agents."
 ---
 
-# Automating Development with Claude Code Sub-Agents
-
 Over the past several months, I've been experimenting with Claude Code as my primary development tool. What started as simple conversational coding has evolved into a fully automated development pipeline. Here's what I've learned.
 
 ## Building Six Apps with Claude Code

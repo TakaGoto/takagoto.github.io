@@ -1,7 +1,9 @@
 {% assign app = include.app %}
-<div class="app-card" style="--app-accent: {{ app.accent }}">
+<a href="/{{ app.slug }}/" class="app-card" style="--app-accent: {{ app.accent }}">
   <div class="app-card-header">
-    <img class="app-card-icon" src="{{ app.icon }}" alt="{{ app.name }}" loading="lazy">
+    {% if app.icon %}
+      <img class="app-card-icon" src="{{ app.icon }}" alt="{{ app.name }}" loading="lazy">
+    {% endif %}
     <div class="app-card-title-row">
       <h3 class="app-card-name">{{ app.name }}</h3>
       {% if app.status == 'live' %}
@@ -14,9 +16,7 @@
     </div>
   </div>
   <p class="app-card-tagline">{{ app.tagline }}</p>
-  {% if app.app_store_url %}
-    <a href="{{ app.app_store_url }}" class="app-card-link" target="_blank" rel="noopener">
-      App Store &rarr;
-    </a>
-  {% endif %}
-</div>
+  <span class="app-card-link">
+    View Details &rarr;
+  </span>
+</a>

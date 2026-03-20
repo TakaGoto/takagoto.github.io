@@ -2,10 +2,10 @@
 layout: post
 title: "Stop Sprinting. Start Learning."
 date: 2026-03-18
-author: taka
+author: Taka Goto
 categories: [tech, ai, software-development]
 tags: [ai, developer-growth, learning, coding]
-excerpt: "Everyone's racing to get AI to write more code, faster. But we're treating AI like a production line when it could be a mentor."
+description: "Everyone's racing to get AI to write more code, faster. But we're treating AI like a production line when it could be a mentor."
 ---
 
 Everyone's racing to get AI to write more code, faster. Ship features. Close tickets. Hit deadlines.

@@ -8,9 +8,7 @@ author: Taka Goto
 description: "First impressions of Claude's Xcode integration — great for pure Swift projects, but limited for cross-platform and monorepo workflows."
 ---
 
-# Claude in Xcode: A Developer's First Impressions
-
-Today I spent some time exploring Anthropic's Claude integration directly inside Xcode. After writing about the [pain points of developing mobile apps with AI](/ai/mobile/development/2026/01/26/what-ai-wont-tell-you-about-building-a-mobile-app-with-it.html), I was hoping a tighter IDE integration would solve a lot of those issues. The idea is compelling: an AI coding assistant that lives in your IDE, understands your codebase, and helps you write and debug code without context-switching. Here's where it shines and where it falls short.
+Today I spent some time exploring Anthropic's Claude integration directly inside Xcode. After writing about the [pain points of developing mobile apps with AI](/blog/what-ai-wont-tell-you-about-building-a-mobile-app-with-it/), I was hoping a tighter IDE integration would solve a lot of those issues. The idea is compelling: an AI coding assistant that lives in your IDE, understands your codebase, and helps you write and debug code without context-switching. Here's where it shines and where it falls short.
 
 ## What Works Well
 
