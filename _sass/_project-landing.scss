@@ -1,0 +1,227 @@
+// Project Landing Pages
+// For open source projects, tools, and non-app-store projects
+
+.project-landing {
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 80px 24px 60px;
+  background-color: var(--project-bg);
+  color: var(--project-text);
+  min-height: 80vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.project-landing-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.project-landing-icon {
+  width: 120px;
+  height: 120px;
+  border-radius: 28px;
+  margin: 0 auto 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+}
+
+.project-landing-badges {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.project-badge-oss {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--project-text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.project-landing-name {
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--project-text);
+  margin-bottom: 12px;
+}
+
+.project-landing-tagline {
+  font-size: 18px;
+  color: var(--project-text-secondary);
+  line-height: 1.6;
+  max-width: 560px;
+  margin: 0 auto 32px;
+}
+
+.project-landing-ctas {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.project-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.project-btn--primary {
+  background: var(--project-text);
+  color: var(--project-bg);
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.project-btn--secondary {
+  background: var(--project-accent-dim);
+  color: var(--project-accent);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+// Content sections
+.project-landing-about,
+.project-landing-section {
+  margin-bottom: 48px;
+
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--project-text);
+    margin-bottom: 16px;
+    letter-spacing: -0.3px;
+  }
+
+  > p {
+    font-size: 16px;
+    color: var(--project-text-secondary);
+    line-height: 1.7;
+  }
+}
+
+.project-landing-about {
+  border-top: 1px solid var(--project-border);
+  padding-top: 48px;
+}
+
+// Features list
+.project-landing-features {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.project-landing-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--project-border);
+
+  strong {
+    display: block;
+    font-size: 15px;
+    color: var(--project-text);
+    margin-bottom: 4px;
+  }
+
+  p {
+    font-size: 14px;
+    color: var(--project-text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+.project-landing-feature-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--project-accent-dim);
+  color: var(--project-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+// Footer
+.project-landing-footer {
+  padding-top: 32px;
+  border-top: 1px solid var(--project-border);
+  text-align: center;
+
+  p {
+    font-size: 13px;
+    color: var(--project-text-secondary);
+    opacity: 0.6;
+  }
+}
+
+// Override default layout background
+body:has(.project-landing) {
+  background-color: var(--project-bg);
+
+  > nav,
+  > footer:not(.project-landing-footer) {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-landing {
+    padding: 48px 20px 40px;
+  }
+
+  .project-landing-name {
+    font-size: 30px;
+  }
+
+  .project-landing-tagline {
+    font-size: 16px;
+  }
+
+  .project-landing-icon {
+    width: 96px;
+    height: 96px;
+    border-radius: 22px;
+  }
+
+  .project-landing-ctas {
+    flex-direction: column;
+    align-items: center;
+  }
+}
