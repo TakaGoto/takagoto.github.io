@@ -1,6 +1,10 @@
 <nav class="site-nav">
   <div class="nav-inner">
     <a href="/" class="nav-brand">taka.goto</a>
+    <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <svg class="hamburger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
     <div class="nav-links">
       <a href="/" class="nav-link{% if page.url == '/' %} active{% endif %}">Home</a>
       <a href="/lab/" class="nav-link{% if page.url == '/lab/' %} active{% endif %}">Lab</a>

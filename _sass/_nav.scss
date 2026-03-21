@@ -27,6 +27,7 @@
   font-weight: 700;
   color: var(--color-text);
   letter-spacing: -0.02em;
+  z-index: 101;
 
   &:hover {
     color: var(--color-primary);
@@ -51,6 +52,27 @@
   &:hover,
   &.active {
     color: var(--color-text);
+  }
+}
+
+// --- Hamburger button (hidden on desktop) ---
+
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  padding: var(--space-1);
+  cursor: pointer;
+  color: var(--color-text);
+  z-index: 101;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .close-icon {
+    display: none;
   }
 }
 
@@ -96,7 +118,41 @@
     padding: var(--space-3) var(--space-4);
   }
 
+  .nav-hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .nav-links {
-    gap: var(--space-4);
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--color-bg);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-8);
+    z-index: 100;
+  }
+
+  .nav-links .nav-link {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+  }
+
+  // Open state
+  .site-nav.nav-open {
+    .nav-links {
+      display: flex;
+    }
+
+    .nav-hamburger {
+      .hamburger-icon { display: none; }
+      .close-icon { display: block; }
+    }
   }
 }

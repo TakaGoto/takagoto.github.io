@@ -178,30 +178,154 @@ a.building-card {
   text-overflow: ellipsis;
 }
 
-// --- Deep Dives section ---
+// --- Featured Project ---
 
-.home-guides {
+.home-featured {
   max-width: var(--page-width);
   margin: 0 auto;
   padding: 0 var(--space-6) var(--space-16);
 }
 
-.home-guides-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+a.featured-card {
+  text-decoration: none;
+  color: inherit;
+}
+
+.featured-card {
+  background: var(--color-bg-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  align-items: flex-start;
   gap: var(--space-6);
+  transition: border-color var(--transition), transform var(--transition);
+
+  &:hover {
+    border-color: #8B5CF6;
+    transform: translateY(-2px);
+  }
 
   @media (max-width: 640px) {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 }
 
-// --- Blog section ---
+.featured-card-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  flex-shrink: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 
-.home-blog {
-  max-width: var(--content-width);
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+}
+
+.featured-card-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.featured-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  flex-wrap: wrap;
+
+  @media (max-width: 640px) {
+    justify-content: center;
+  }
+}
+
+.featured-card-name {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.featured-card-oss {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 2px 8px;
+}
+
+.featured-card-description {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-3);
+}
+
+.featured-card-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+
+  @media (max-width: 640px) {
+    justify-content: center;
+  }
+}
+
+.featured-card-link {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.featured-card-link-sep {
+  color: var(--color-text-muted);
+}
+
+// --- Two-column: Deep Dives + Blog ---
+
+.home-two-col {
+  max-width: var(--page-width);
   margin: 0 auto;
   padding: 0 var(--space-6) var(--space-16);
+}
+
+.home-two-col-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-10);
+  align-items: start;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+}
+
+.home-guides-compact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.home-see-all {
+  display: inline-block;
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-primary);
+  font-weight: 600;
+
+  &:hover {
+    color: var(--color-primary-hover);
+  }
 }
 
 .section-label {
