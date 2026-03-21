@@ -44,9 +44,9 @@ If someone finds a better way to explain embeddings, or a cleaner code example, 
 
 ## Why AI + Learning is What Excites Me Right Now
 
-I wrote a post recently about [slowing down to actually learn](/2026/03/18/stop-sprinting-start-learning) instead of just shipping. That idea has been stuck in my head.
+I wrote a post recently about [slowing down to actually learn](/blog/stop-sprinting-start-learning/) instead of just shipping. That idea has been stuck in my head.
 
-AI is incredible at generating answers. But it's even better as a learning partner. When I was building my [local RAG system](/2026/02/12/building-rag-locally-to-actually-understand-it), the moments where I learned the most weren't when the code worked. They were when I asked "why did you do it that way?" and actually listened to the answer.
+AI is incredible at generating answers. But it's even better as a learning partner. When I was building my [local RAG system](/blog/building-rag-locally-to-actually-understand-it/), the moments where I learned the most weren't when the code worked. They were when I asked "why did you do it that way?" and actually listened to the answer.
 
 RAG Academy is me trying to bottle that experience. Instead of just reading about how vector search works, you build it. And when something doesn't make sense, you have an AI right there to ask. Not to give you the answer, but to help you find it.
 
