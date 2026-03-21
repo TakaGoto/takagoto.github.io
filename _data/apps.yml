@@ -132,6 +132,19 @@
       url: "https://b-delta-six.vercel.app/events"
       accent: "#F43F5E"
 
+- name: RAG Academy
+  slug: ragacademy
+  tagline: "Learn RAG step by step. Interactive lessons on embeddings, vector search, and retrieval pipelines."
+  status: building
+  accent: "#8B5CF6"
+  category: education
+  icon: /ragacademy/icon.png
+  features:
+    - Interactive RAG lessons and exercises
+    - Hands-on embedding and vector search tutorials
+    - Build your own retrieval pipeline
+    - Progress tracking across modules
+
 - name: CrystalLens
   slug: crystallens
   tagline: "Identify crystals and minerals with AI. Snap a photo, get instant identification."
