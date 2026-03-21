@@ -1,7 +1,7 @@
 - name: "RAG from Scratch"
   slug: rag
   description: "Build a Retrieval-Augmented Generation pipeline from first principles. Covers chunking, embeddings, vector search, and generation."
-  status: in-progress
+  status: complete
   accent: "#8B5CF6"
   sections:
     - title: "Introduction"
