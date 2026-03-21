@@ -138,7 +138,7 @@
   status: building
   accent: "#8B5CF6"
   category: education
-  icon: /ragacademy/icon.png
+  icon: /ragacademy/icon.svg
   features:
     - Interactive RAG lessons and exercises
     - Hands-on embedding and vector search tutorials
