@@ -135,7 +135,7 @@
 - name: RAG Academy
   slug: ragacademy
   tagline: "Learn RAG step by step. Interactive lessons on embeddings, vector search, and retrieval pipelines."
-  status: building
+  status: live
   accent: "#8B5CF6"
   category: education
   icon: /ragacademy/icon.svg
@@ -171,4 +171,17 @@
     - Disease and pest diagnosis
     - Treatment recommendations
     - Care schedule suggestions
+
+- name: CardHive
+  slug: cardhive
+  tagline: "Buy, sell, and trade cards with local collectors. Meet up at game stores, skip the shipping."
+  status: building
+  accent: "#F59E0B"
+  category: trading-cards
+  icon: /cardhive/icon.svg
+  features:
+    - Local TCG marketplace with buy, sell, and trade listings
+    - Card database with search and seller discovery
+    - Game store directory organized by city
+    - Seller ratings and trust system with Discord authentication
 
