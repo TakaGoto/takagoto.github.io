@@ -43,6 +43,28 @@ layout: home
   </div>
 </section>
 
+<section class="home-featured">
+  <h2 class="section-label">Featured Project</h2>
+  <a href="/ragacademy/" class="featured-card">
+    <div class="featured-card-icon">
+      <img src="/ragacademy/icon.svg" alt="RAG Academy icon" />
+    </div>
+    <div class="featured-card-content">
+      <div class="featured-card-header">
+        <h3 class="featured-card-name">RAG Academy</h3>
+        <span class="badge badge-live">Live</span>
+        <span class="featured-card-oss">Open Source</span>
+      </div>
+      <p class="featured-card-description">An open source, AI-guided course that teaches you Retrieval-Augmented Generation by having you actually build it. No vendor lock-in, no outdated tutorials.</p>
+      <div class="featured-card-links">
+        <span class="featured-card-link">View Project</span>
+        <span class="featured-card-link-sep">/</span>
+        <span class="featured-card-link" onclick="event.preventDefault(); window.open('https://github.com/TakaGoto/rag-learning-academy', '_blank');">GitHub</span>
+      </div>
+    </div>
+  </a>
+</section>
+
 <section class="home-building">
   <h2 class="section-label">Currently Working On</h2>
   <div class="home-building-grid">
@@ -92,45 +114,48 @@ layout: home
   </div>
 </section>
 
-<section class="home-guides">
-  <h2 class="section-label">Deep Dives</h2>
-  <div class="home-guides-grid">
-    {% for guide in site.data.guides %}
-    <a href="/guides/{{ guide.slug }}/" class="guide-card" style="--guide-accent: {{ guide.accent }}">
-      <div class="guide-card-header">
-        {% if guide.status == "in-progress" %}
-        <span class="badge badge-building">In Progress</span>
-        {% else %}
-        <span class="badge badge-live">Complete</span>
-        {% endif %}
-        <span class="guide-card-count">{{ guide.sections.size }} sections</span>
+<section class="home-two-col">
+  <div class="home-two-col-grid">
+    <div class="home-two-col-left">
+      <h2 class="section-label">Deep Dives</h2>
+      <div class="home-guides-compact">
+        {% for guide in site.data.guides %}
+        <a href="/guides/{{ guide.slug }}/" class="guide-card" style="--guide-accent: {{ guide.accent }}">
+          <div class="guide-card-header">
+            {% if guide.status == "in-progress" %}
+            <span class="badge badge-building">In Progress</span>
+            {% else %}
+            <span class="badge badge-live">Complete</span>
+            {% endif %}
+            <span class="guide-card-count">{{ guide.sections.size }} sections</span>
+          </div>
+          <h2 class="guide-card-title">{{ guide.name }}</h2>
+          <p class="guide-card-description">{{ guide.description }}</p>
+        </a>
+        {% endfor %}
       </div>
-      <h2 class="guide-card-title">{{ guide.name }}</h2>
-      <p class="guide-card-description">{{ guide.description }}</p>
-    </a>
-    {% endfor %}
-  </div>
-</section>
-
-<section class="home-blog">
-  <h2 class="section-label">Recent Writing</h2>
-  {% for post in site.posts %}
-  {% assign words = post.content | number_of_words %}
-  {% assign reading_time = words | divided_by: 200 | plus: 1 %}
-  <div class="blog-card">
-    <div class="blog-card-meta">
-      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
-      <span>/</span>
-      <span>{{ reading_time }} min</span>
     </div>
-    <h3 class="blog-card-title">
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-    </h3>
-    {% if post.excerpt %}
-    <p class="blog-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
-    {% endif %}
+    <div class="home-two-col-right">
+      <h2 class="section-label">Recent Writing</h2>
+      {% for post in site.posts limit:5 %}
+      {% assign words = post.content | number_of_words %}
+      {% assign reading_time = words | divided_by: 200 | plus: 1 %}
+      <div class="blog-card">
+        <div class="blog-card-meta">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
+          <span>/</span>
+          <span>{{ reading_time }} min</span>
+        </div>
+        <h3 class="blog-card-title">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </h3>
+      </div>
+      {% endfor %}
+      {% if site.posts.size > 5 %}
+      <a href="/blog/" class="home-see-all">See all posts</a>
+      {% endif %}
+    </div>
   </div>
-  {% endfor %}
 </section>
 
 <div class="home-rss">
