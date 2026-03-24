@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Announcing RAG Academy, My First Open Source Project"
+title: "Announcing RAG Academy, My Open Source Project"
 date: 2026-03-21
 author: Taka Goto
 categories: [ai, open-source, learning]
@@ -36,7 +36,7 @@ It's also vendor-agnostic. No paid service lock-in. You learn the concepts, not 
 
 ## Why Open Source?
 
-This is my first open source project, and honestly it feels like the only way this should exist.
+This is an open source project, and honestly it feels like the only way this should exist.
 
 I learned most of what I know about RAG from free resources. Blog posts, docs, random GitHub repos. It'd feel wrong to take that knowledge and lock it behind something. Plus, the best way to make sure the content is actually good is to let people poke holes in it.
 

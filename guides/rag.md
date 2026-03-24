@@ -9,41 +9,41 @@ description: "Build a Retrieval-Augmented Generation pipeline from first princip
 ## Introduction
 {: #introduction}
 
-Have you ever asked ChatGPT a question about your own documents and gotten a completely made-up answer? That's because the AI doesn't actually *know* your stuff. It only knows what it was trained on.
+So I kept hearing people say "RAG is the real product" and honestly I didn't get it at first. I thought RAG was just a fancy way of saying "use an LLM." Turns out it's way more than that.
 
-RAG (Retrieval-Augmented Generation) solves this. Instead of hoping the AI has the right information memorized, you **look up the answer first** and then hand it to the AI along with the question. Think of it like an open-book exam: the AI doesn't need to memorize everything, it just needs to know where to look.
+Here's the problem: if you ask an AI about your own documents, it'll just make something up. It doesn't *know* your stuff. It only knows what it was trained on. RAG fixes this. Instead of hoping the AI memorized the right info, you look up the answer first and hand it to the AI along with the question. Like an open-book exam.
 
-This guide walks you through building a RAG system from scratch. We'll start with the concepts, then build a working version you can run on your laptop. No prior AI experience needed.
+I built a RAG system from scratch to actually understand how it works, and this guide is everything I learned along the way. We'll go from the concepts all the way to working code you can run on your laptop. You don't need any AI experience to follow along.
 
 
 ## What RAG Is
 {: #what-rag-is}
 
-Imagine you're a new employee at a company. Someone asks you a question about the company's refund policy. You have two options:
+Here's the simplest way I can explain it. Imagine you just started a new job and someone asks you about the company's refund policy. You can either:
 
 1. **Guess** based on what you've seen at other companies
 2. **Look it up** in the company handbook, then answer based on what you found
 
-Option 2 is RAG. Here's what each letter stands for:
+Option 2 is RAG. That's literally it. The letters stand for:
 
 - **Retrieval**: find the relevant pages in the handbook
 - **Augmented**: add those pages to the question as context
 - **Generation**: the AI reads the context and writes an answer based on it
 
-The actual steps look like this:
+In practice, the steps are:
 
 1. **Break your documents into small pieces** (called "chunks")
-2. **Convert each piece into a searchable format** (we'll explain how later)
+2. **Convert each piece into a searchable format** (I'll explain how later)
 3. **When someone asks a question, find the most relevant pieces**
 4. **Give those pieces to the AI along with the question**
 5. **The AI writes an answer based only on what you gave it**
 
-The beauty of this approach is that you never need to retrain the AI. If your documents change, you just update your search index. That's it.
+The best part? You never need to retrain the AI. If your documents change, you just update your search index. That's it.
 
 ### When would you use RAG instead of fine-tuning?
 {: #rag-vs-fine-tuning}
 
-You might have heard of "fine-tuning," which is another way to teach an AI new information. Here's the difference:
+You might have heard of "fine-tuning" which is another way to teach an AI new information. Here's how I think about it:
 
 | Approach | Think of it like... | Best for |
 |----------|-------------------|----------|
@@ -57,51 +57,51 @@ For most projects, like building a chatbot for your company's docs or a search t
 ## RAG vs Large Context Windows
 {: #rag-vs-large-context-windows}
 
-AI models keep getting smarter. Claude can handle 200,000 tokens of text (roughly 500 pages), and Gemini can handle over a million. So a fair question is: why not just paste all your documents directly into the AI and skip the retrieval step entirely?
+This is a question that comes up a lot. AI models keep getting bigger context windows. Claude can handle 200,000 tokens (roughly 500 pages), Gemini can handle over a million. So why not just paste all your documents into the AI and skip the retrieval step?
 
-Two big reasons.
+Two reasons.
 
 ### It's like searching vs reading every page
 {: #precision-over-brute-force}
 
-Imagine you have a 1,000-page company manual and someone asks, "What's our vacation policy?" You could:
+Say you have a 1,000-page company manual and someone asks "What's our vacation policy?" You could:
 
 **Option A**: Read all 1,000 pages and try to find the answer. You might miss it. You'll definitely be slow. And if the answer is buried on page 537, you might accidentally mix it up with something you read on page 200.
 
 **Option B**: Use the table of contents to jump straight to the "Vacation Policy" section and read just that page.
 
-Option A is the large context window approach. Option B is RAG. RAG gives the AI *only* the relevant information, so it's more likely to give you an accurate answer. Research has shown that AI models actually get *less* accurate when you give them too much text, especially when the important part is buried in the middle.
+Option A is the large context window approach. Option B is RAG. Research has actually shown that AI models get *less* accurate when you give them too much text, especially when the important part is buried in the middle. I found this surprising but it makes sense when you think about it.
 
 ### It's way cheaper
 {: #cost-and-latency}
 
-AI companies charge you based on how much text you send. Here's a rough comparison:
+AI companies charge based on how much text you send. Here's what the difference looks like:
 
 | Approach | Text sent per question | Relative cost |
 |----------|----------------------|---------------|
 | **Send everything** (100 docs) | ~150,000 words | 100x |
 | **RAG** (just the relevant parts) | ~1,500 words | 1x |
 
-If you're building something that handles thousands of questions a day, this difference adds up fast. RAG also gives faster responses because the AI has less text to process.
+If you're building something that handles thousands of questions a day, this adds up fast. RAG also gives faster responses because the AI has less text to process.
 
 ### When *should* you just send everything?
 
-The "send everything" approach works fine when you have a small amount of text and just need a one-off answer. For example, "Summarize this 20-page report" or "Compare these two contracts." But for anything with a lot of documents and repeated queries, RAG is the way to go.
+The "send everything" approach works fine when you have a small amount of text and just need a one-off answer. "Summarize this 20-page report" or "Compare these two contracts." But for anything with a lot of documents and repeated queries, RAG is the way to go.
 
 
 ## The Smallest RAG Architecture
 {: #the-smallest-rag-architecture}
 
-Let's zoom out and look at the full picture. A RAG system has two phases:
+Let me zoom out and show you the full picture. A RAG system has two phases:
 
 ### Phase 1: Preparation (done once, or when documents change)
 {: #phase-1-preparation}
 
-1. **Load your documents**: these could be PDFs, text files, markdown files, web pages, whatever you have
+1. **Load your documents**: PDFs, text files, markdown, web pages, whatever you have
 2. **Parse them into clean text**: extract the actual content and strip out formatting noise (more on this in the next section)
-3. **Split them into chunks**: break each document into smaller pieces (like paragraphs or sections)
-4. **Convert chunks into numbers**: each chunk gets turned into a list of numbers called an "embedding" that captures its meaning (more on this later)
-5. **Save everything**: store the numbers in a searchable index, kind of like building a custom search engine for your documents
+3. **Split them into chunks**: break each document into smaller pieces, like paragraphs or sections
+4. **Convert chunks into numbers**: each chunk gets turned into a list of numbers called an "embedding" that captures its meaning (I'll explain this later, it's actually not as complicated as it sounds)
+5. **Save everything**: store the numbers in a searchable index. Think of it like building a custom search engine for your documents
 
 ### Phase 2: Answering questions (happens every time someone asks something)
 {: #phase-2-answering}
@@ -109,7 +109,7 @@ Let's zoom out and look at the full picture. A RAG system has two phases:
 1. **Convert the question into numbers**: using the same method you used for the documents
 2. **Find the closest matches**: search your index for the chunks that are most similar to the question
 3. **Build a prompt**: combine the instructions ("answer based on this context"), the matching chunks, and the user's question
-4. **Generate the answer**: send the prompt to the AI and get back an answer that's grounded in your actual documents
+4. **Generate the answer**: send the prompt to the AI and get back an answer grounded in your actual documents
 
 Here's what that looks like as a diagram:
 
@@ -135,22 +135,22 @@ That's the entire architecture. Everything else you'll hear about (reranking, hy
 ## Why Build It Locally
 {: #why-build-it-locally}
 
-You might be wondering why we'd build this on a laptop instead of using a cloud service. The answer is simple: **you learn better when you can see everything breaking.**
+You might be wondering why I'd build this on a laptop instead of using a cloud service. Honestly, it's because **you learn so much more when you can see everything breaking.**
 
-When you run RAG locally, you get to *feel* the tradeoffs firsthand:
+When you run RAG locally, you get to *feel* the tradeoffs:
 
 - Make your chunks too big and the search gets sloppy
 - Make your chunks too small and the answers are incomplete
 - Use a weak embedding model and it retrieves the wrong stuff
 - Send too much context to the AI and it actually gets *worse*, not better
 
-These are lessons that are hard to learn from reading docs but obvious when you see them happen on your own machine.
+These are things that are hard to learn from reading docs but become super obvious when you see them happen on your own machine.
 
-Plus, there's a practical benefit: no API costs while you're experimenting. You can run the same question 100 times while tweaking settings and it won't cost you a penny.
+Plus, no API costs while you're experimenting. You can run the same question 100 times while tweaking settings and it won't cost you a penny.
 
 ### What you'll need
 
-- **Python 3.10 or newer** (the programming language we'll use)
+- **Python 3.10 or newer**
 - **A few documents to test with** (markdown, text files, or PDFs)
 - **At least 8GB of RAM** (16GB is better)
 - **Optional**: a GPU for faster generation, but it's not required
@@ -159,16 +159,16 @@ Plus, there's a practical benefit: no API costs while you're experimenting. You 
 ## Document Parsing
 {: #document-parsing}
 
-Before you can chunk and search your documents, you need to turn them into clean text. This step sounds boring, but it's where a lot of real-world RAG projects run into trouble.
+Before you can chunk and search your documents, you need to turn them into clean text. This sounds boring but it's where a lot of real-world RAG projects get stuck.
 
-**Markdown and plain text** are easy. They're already text. You just read the file.
+**Markdown and plain text** are easy. They're already text. Just read the file.
 
-**PDFs are hard.** A PDF is really a set of drawing instructions ("put this character at these coordinates"), not structured text. When you extract text from a PDF, you can run into all kinds of problems:
+**PDFs are a nightmare.** Seriously. A PDF is really a set of drawing instructions ("put this character at these coordinates"), not structured text. When you try to extract text from a PDF, all sorts of things go wrong:
 
 - Tables come out as jumbled text with columns mixed together
 - Headers and footers repeat on every page and end up in your chunks
 - Multi-column layouts merge into one stream of text
-- Scanned PDFs are just images, so you need OCR (optical character recognition) to extract text at all
+- Scanned PDFs are just images, so you need OCR to extract text at all
 
 **HTML** needs cleaning too. You want the article content, not the navigation bars, cookie banners, and sidebar ads.
 
@@ -210,36 +210,36 @@ def extract_pdf(path):
     return cleaned
 ```
 
-*In plain English: this code reads all files from a folder. For text and markdown files, it just reads them directly. For PDFs, it uses PyMuPDF to extract the text, then does some basic cleanup to remove blank lines.*
+*In plain English: this reads all files from a folder. For text and markdown, it just reads them directly. For PDFs, it uses PyMuPDF to extract the text, then does some basic cleanup.*
 
 ### The takeaway
 
-Don't underestimate this step. If your parsing is bad, your chunks will be bad, your search will be bad, and your answers will be bad. It's worth spending time getting clean text before moving on. For a first project, stick with markdown or text files to avoid the parsing headaches entirely.
+Don't underestimate this step. If your parsing is bad, your chunks will be bad, your search will be bad, and your answers will be bad. For a first project, just stick with markdown or text files and avoid the parsing headaches entirely. That's what I did.
 
 
 ## Chunking Strategies
 {: #chunking-strategies}
 
-Chunking is how you break your documents into smaller pieces. This might sound simple, but it's actually the most important step in the whole pipeline. **If your chunks are bad, everything else will be bad too.**
+This is the part that tripped me up the most. Chunking is how you break your documents into smaller pieces, and it sounds simple but it's actually the most important step in the whole pipeline. **If your chunks are bad, everything else will be bad too.**
 
-Think of it this way: if you ripped a textbook into random pieces, some pieces would have complete explanations and some would be cut off mid-sentence. If someone searched for "how does photosynthesis work?" and you handed them a piece that starts with "...the chloroplast. In other news, mitosis is..." they wouldn't get a useful answer.
+Think of it this way: if you ripped a textbook into random pieces, some pieces would have complete explanations and some would be cut off mid-sentence. If someone searched for "how does photosynthesis work?" and you handed them a piece that starts with "...the chloroplast. In other news, mitosis is..." they wouldn't get a useful answer. That's what bad chunking does.
 
 ### Why overlap matters
 {: #why-overlap-matters}
 
-Before we look at specific approaches, let's talk about overlap. When you split text into chunks, you lose context at the edges. Here's a concrete example:
+Before we look at specific approaches, let me show you why overlap is important. When you split text into chunks, you lose context at the edges.
 
-Imagine this is your original text:
+Here's a concrete example. Say this is your original text:
 > "The refund policy allows returns within 30 days. Items must be in original packaging. Refunds are processed within 5 business days."
 
 If you split this into two chunks right at "packaging.", the first chunk ends with "Items must be in original packaging." and the second starts with "Refunds are processed within 5 business days." Now if someone asks "How long do refunds take and what condition do items need to be in?", neither chunk has the full answer.
 
-With overlap, the second chunk would start with "Items must be in original packaging. Refunds are processed within 5 business days." Now the second chunk has both pieces of information.
+With overlap, the second chunk would start with "Items must be in original packaging. Refunds are processed within 5 business days." Now the second chunk has both pieces of information. Simple fix, big difference.
 
 ### Approach 1: Fixed-size windows
 {: #fixed-size-windows}
 
-The simplest approach is to split the text every N words, with some overlap between chunks.
+The simplest approach. Split the text every N words, with some overlap.
 
 ```python
 def chunk_fixed(text, chunk_size=500, overlap=50):
@@ -252,12 +252,12 @@ def chunk_fixed(text, chunk_size=500, overlap=50):
     return chunks
 ```
 
-*In plain English: this takes your text, splits it into groups of 500 words, and makes each group overlap by 50 words with the next one. The overlap means you won't accidentally lose context between two chunks.*
+*In plain English: splits your text into groups of 500 words, with each group overlapping by 50 words with the next one so you don't lose context at the edges.*
 
 **Good**: simple, predictable chunk sizes.
 **Bad**: doesn't care about meaning. It'll happily split in the middle of a paragraph.
 
-A note about words vs tokens: this code counts **words**, not tokens. In AI-land, a "token" is a smaller unit (roughly 1 word = 1.3 tokens). The distinction matters when you're thinking about context window limits later, but for chunking, counting words is fine and much simpler.
+One thing that confused me at first: this code counts **words**, not tokens. In AI-land, a "token" is a smaller unit (roughly 1 word = 1.3 tokens). The distinction matters later when you're thinking about context window limits, but for chunking, counting words is fine.
 
 ### Approach 2: Split by headings
 {: #split-by-headings}
@@ -277,15 +277,15 @@ def chunk_by_headings(markdown_text):
     return chunks
 ```
 
-*In plain English: this looks for headings in your markdown document (lines starting with # or ##) and splits the document at each heading. Each chunk is a complete section.*
+*In plain English: looks for headings in your markdown (lines starting with # or ##) and splits at each one. Each chunk is a complete section.*
 
 **Good**: each chunk is a complete thought or topic.
-**Bad**: sections can be very different sizes (one might be 50 words, another might be 2,000).
+**Bad**: sections can be wildly different sizes. One might be 50 words, another might be 2,000.
 
 ### Approach 3: Recursive splitting
 {: #recursive-splitting}
 
-This is what most RAG frameworks (like LangChain) use by default. The idea is to try splitting at the most meaningful boundaries first, and only fall back to simpler splits if needed.
+This is what most RAG frameworks (like LangChain) use by default, and once I understood it, it made a lot of sense. The idea is to try splitting at the most meaningful boundaries first, and only fall back to simpler splits if needed.
 
 It works like a priority list:
 
@@ -329,7 +329,7 @@ def chunk_recursive(text, max_size=500, overlap=50):
     return chunks
 ```
 
-*In plain English: this tries to split your text at natural break points like paragraph boundaries and sentence endings. It only splits at word boundaries as a last resort. This usually produces chunks that feel like natural sections rather than arbitrary slices.*
+*In plain English: tries to split at natural break points like paragraph boundaries and sentence endings. Only splits at word boundaries as a last resort. This usually produces chunks that feel like natural sections rather than arbitrary slices.*
 
 **Good**: respects the natural structure of the text without requiring specific formatting like headings.
 **Bad**: more complex code, chunk sizes can still vary.
@@ -339,17 +339,17 @@ def chunk_recursive(text, max_size=500, overlap=50):
 - **Start with 300 to 800 words per chunk.** Too short and you lose meaning. Too long and you get noise.
 - **Use 10 to 20% overlap** so important context isn't lost at chunk boundaries.
 - **Save where each chunk came from** (the filename, section heading, page number). You'll need this later for citations.
-- **Test your search results early.** Ask a few questions and check if the right chunks come back. If they don't, fix your chunking before doing anything else.
+- **Test your search results early.** Ask a few questions and check if the right chunks come back. If they don't, fix your chunking before doing anything else. I learned this the hard way.
 
 
 ## Embeddings Deep Dive
 {: #embeddings-deep-dive}
 
-This is the part that sounds the most intimidating but is actually pretty intuitive once you see it.
+Alright, this is the part that sounds the most intimidating but is actually pretty intuitive once you see it.
 
-An **embedding** is just a way to convert text into a list of numbers. Why would you want to do that? Because computers are really good at comparing numbers, but not great at comparing the *meaning* of sentences.
+An **embedding** is just a way to convert text into a list of numbers. Why would you want to do that? Because computers are really good at comparing numbers, but terrible at comparing the *meaning* of sentences.
 
-Here's the key insight: when you convert text to numbers using an embedding model, **texts that mean similar things end up with similar numbers**. It's like plotting cities on a map. New York and Boston end up close together, while New York and Tokyo end up far apart. Embeddings do the same thing, but for meaning instead of geography.
+Here's the thing that made it click for me: when you convert text to numbers using an embedding model, **texts that mean similar things end up with similar numbers**. It's like plotting cities on a map. New York and Boston end up close together, while New York and Tokyo end up far apart. Embeddings do the same thing, but for meaning instead of geography.
 
 ### Picking an embedding model
 {: #picking-an-embedding-model}
@@ -364,9 +364,9 @@ You don't need to build your own. There are pre-trained models you can download 
 | `text-embedding-3-small` | 1536 | Fast | Great | No (OpenAI API) |
 | `voyage-3-lite` | 512 | Fast | Great | No (Voyage API) |
 
-The "dimensions" column is how many numbers each piece of text gets converted into. More numbers can capture more nuance, but use more memory and are slower to search.
+The "dimensions" column is how many numbers each piece of text gets converted into. More numbers means more nuance, but also more memory and slower search.
 
-For learning, start with `all-MiniLM-L6-v2`. It's fast enough to experiment with and good enough to see real results.
+For learning, start with `all-MiniLM-L6-v2`. It's fast enough to experiment with and good enough to see real results. That's what I used.
 
 ### How to generate embeddings
 
@@ -386,14 +386,14 @@ embeddings = embeddings / norms
 print(embeddings.shape)  # (2, 384)
 ```
 
-*In plain English: we loaded a pre-trained model, gave it two sentences, and it gave us back two lists of 384 numbers each. Then we "normalized" the numbers (scaled them so they're all on the same scale), which makes comparing them more accurate later. Those numbers represent the "meaning" of each sentence in a way that a computer can compare.*
+*In plain English: we loaded a pre-trained model, gave it two sentences, and got back two lists of 384 numbers each. Then we normalized them (scaled them so they're on the same scale), which makes comparing them more accurate later.*
 
 ### Key concepts to know
 {: #key-embedding-concepts}
 
-- **Cosine similarity** is how we measure whether two pieces of text mean similar things. It gives a score from 0 to 1. A score near 1 means "very similar meaning" and near 0 means "completely unrelated." For cosine similarity to work correctly, your embeddings need to be normalized (which is what we did above).
+- **Cosine similarity** is how you measure whether two pieces of text mean similar things. Score from 0 to 1. Near 1 = very similar, near 0 = completely unrelated. For it to work right, your embeddings need to be normalized (which is what we did above).
 
-- **You must use the same model for everything.** If you used Model A to convert your documents into numbers, you have to use Model A to convert the question too. Mixing models is like measuring one thing in miles and another in kilometers and comparing the raw numbers.
+- **You have to use the same model for everything.** If you used Model A to convert your documents into numbers, you have to use Model A to convert the question too. Mixing models is like measuring one thing in miles and another in kilometers and comparing the raw numbers. I made this mistake early on and couldn't figure out why my results were garbage.
 
 - **More numbers = more detail, but more cost.** A 384-dimension embedding is like a rough sketch. A 1536-dimension embedding is like a detailed portrait. The detailed version catches more nuance but uses more memory and is slower to search.
 
@@ -401,7 +401,7 @@ print(embeddings.shape)  # (2, 384)
 ## Vector Search and Retrieval
 {: #vector-search-and-retrieval}
 
-Now that your chunks are converted into numbers (embeddings), you need a way to search through them quickly. This is where vector search comes in.
+Now that your chunks are converted into numbers, you need a way to search through them quickly. This is where vector search comes in.
 
 The idea is simple: when someone asks a question, convert the question into numbers using the same embedding model, then find the chunks whose numbers are closest to the question's numbers. "Closest" here means "most similar in meaning."
 
@@ -410,7 +410,7 @@ For learning, we'll use FAISS (pronounced "face"), a free tool from Facebook tha
 ### How FAISS works
 {: #how-faiss-works}
 
-Since we normalized our embeddings earlier, we'll use FAISS's inner product search (`IndexFlatIP`), which gives us cosine similarity scores directly. Higher scores mean better matches.
+Since we normalized our embeddings earlier, we'll use FAISS's inner product search (`IndexFlatIP`), which gives us cosine similarity scores directly. Higher scores = better matches.
 
 ```python
 import faiss
@@ -435,12 +435,12 @@ for i, idx in enumerate(indices[0]):
     print(f"Result {i+1}: {chunks[idx]} (similarity: {scores[0][i]:.4f})")
 ```
 
-*In plain English: we built a search index from our chunk embeddings, then asked "How does RAG work?" The system found the 3 chunks whose meaning is most similar to that question. The higher the similarity score, the better the match (1.0 would be a perfect match).*
+*In plain English: we built a search index, asked "How does RAG work?", and it found the 3 chunks whose meaning is most similar to that question. Higher similarity score = better match.*
 
 ### Why retrieval quality matters so much
 {: #why-retrieval-quality-matters}
 
-Here's something that trips people up: **if the search returns the wrong chunks, the AI will confidently give you a wrong answer based on those chunks.** The AI doesn't know the chunks are irrelevant. It just reads whatever you give it and does its best.
+Here's the thing that nobody warns you about: **if the search returns the wrong chunks, the AI will confidently give you a wrong answer based on those chunks.** The AI doesn't know the chunks are irrelevant. It just reads whatever you give it and does its best.
 
 This is why retrieval is the most important part of the system. A few ways to improve it:
 
@@ -449,7 +449,7 @@ This is why retrieval is the most important part of the system. A few ways to im
 - **Combine with keyword search**: sometimes a simple keyword match ("refund policy") works better than meaning-based search, so you can use both
 - **Filter by metadata**: if you know the question is about a specific topic or time period, filter results before searching
 
-Start with basic vector search and only add complexity when you can see it's actually helping.
+Start with basic vector search and only add complexity when you can actually see it helping.
 
 
 ## Building the Pipeline
@@ -459,7 +459,7 @@ Let's put it all together. Here's a complete, working RAG system you can run on 
 
 ### Setting up
 
-First, install the tools we need:
+First, install the tools:
 
 ```bash
 pip install sentence-transformers faiss-cpu PyMuPDF
@@ -467,7 +467,7 @@ pip install sentence-transformers faiss-cpu PyMuPDF
 # Then pull a model: ollama pull llama3.2
 ```
 
-*Ollama lets you run AI models on your computer for free. The `llama3.2` model is a good starting point. Make sure Ollama is running before you try the code below.*
+*Ollama lets you run AI models on your computer for free. `llama3.2` is a good starting point. Make sure Ollama is running before you try the code below.*
 
 ### The full code
 {: #the-full-code}
@@ -564,7 +564,7 @@ Answer:"""
         return f"Error generating answer: {e}"
 ```
 
-*In plain English: this code does everything we've talked about. It reads your documents, splits them into chunks, converts each chunk into numbers (and normalizes them), builds a search index, and then when you ask a question, it finds the best matching chunks, puts them into a prompt, and sends it to a locally running AI model for an answer. If something goes wrong with the AI connection, it gives you a helpful error message instead of crashing.*
+*In plain English: this does everything we've talked about. Reads your documents, splits them into chunks, converts each chunk into numbers, builds a search index, and then when you ask a question, finds the best chunks, builds a prompt, and sends it to a local AI model. If something goes wrong with the connection, it gives you a helpful error instead of crashing.*
 
 ### Running it
 
@@ -576,11 +576,11 @@ answer = query_rag("What is chunking in RAG?", model, index, chunks, metadata)
 print(answer)
 ```
 
-Put some markdown files in a `my-docs` folder, run the code, and ask it questions. Even this simple setup will teach you most of what matters about RAG.
+Put some markdown files in a `my-docs` folder, run the code, and ask it questions. Even this simple setup teaches you most of what matters about RAG.
 
 ---
 
-**The basics end here.** Everything above is enough to build a working RAG system. The sections below cover more advanced topics: writing better prompts, measuring quality, handling real-world complications like access control and structured data, and understanding where RAG struggles. Read them when you're ready to level up.
+**The basics end here.** Everything above is enough to build a working RAG system. The sections below cover the more advanced stuff: writing better prompts, measuring quality, access control, structured data, and where RAG falls flat. Come back to these when you're ready.
 
 ---
 
@@ -588,9 +588,9 @@ Put some markdown files in a `my-docs` folder, run the code, and ask it question
 ## Prompt Engineering for RAG
 {: #prompt-engineering-for-rag}
 
-The prompt is the instruction you send to the AI along with the retrieved chunks. You might think this is a minor detail, but a bad prompt can completely waste good retrieval results.
+The prompt is what you send to the AI along with the retrieved chunks. I thought this was a minor detail at first, but a bad prompt can completely waste good retrieval results.
 
-Think of it this way: you just handed a research assistant the perfect stack of reference documents. But if your instructions are vague ("just answer the question"), they might ignore the documents and answer from memory instead.
+Think of it this way: you just handed a research assistant the perfect stack of reference documents. But if your instructions are vague ("just answer the question"), they might ignore the documents and answer from memory instead. Same thing happens with AI.
 
 ### Four rules for good RAG prompts
 {: #four-rules-for-rag-prompts}
@@ -620,8 +620,8 @@ Answer:
 ### Common mistakes
 {: #common-prompt-mistakes}
 
-- **Sending too many chunks**: more context isn't always better. If you send 10 chunks and only 2 are relevant, the AI might get confused by the other 8. It's better to send 3 great chunks than 10 mediocre ones.
-- **Not telling the AI to stick to the context**: without this instruction, the AI will happily fill in gaps with its own training data, which might be wrong for your specific documents.
+- **Sending too many chunks**: more context isn't always better. If you send 10 chunks and only 2 are relevant, the AI might get confused by the other 8. Better to send 3 great chunks than 10 mediocre ones.
+- **Not telling the AI to stick to the context**: without this instruction, the AI will happily fill in gaps with its own training data, which might be wrong for your documents.
 - **Not letting the AI say "I don't know"**: AI models are people-pleasers. They'll always try to give *some* answer. You need to explicitly tell them it's okay to say "I don't have that information."
 
 
@@ -635,20 +635,20 @@ There are two things to measure: **is the search finding the right chunks?** and
 ### Measuring search quality
 {: #measuring-search-quality}
 
-- **Recall**: out of all the chunks that *should* have been found, how many did the search actually find? If there are 3 relevant chunks in your index and the search found 2 of them, recall is 67%.
-- **Precision**: out of all the chunks the search returned, how many were actually relevant? If it returned 5 chunks but only 2 were useful, precision is 40%.
-- **MRR (Mean Reciprocal Rank)**: how high up in the results is the first relevant chunk? If the best chunk is the very first result, great. If it's the fifth result, that's worse.
+- **Recall**: out of all the chunks that *should* have been found, how many did the search actually find? If there are 3 relevant chunks and the search found 2, recall is 67%.
+- **Precision**: out of all the chunks returned, how many were actually relevant? If it returned 5 chunks but only 2 were useful, precision is 40%.
+- **MRR (Mean Reciprocal Rank)**: how high up is the first relevant chunk? If the best chunk is result #1, great. If it's result #5, that's worse.
 
 ### Measuring answer quality
 {: #measuring-answer-quality}
 
-- **Faithfulness**: did the AI only use information from the chunks you gave it, or did it make stuff up?
-- **Relevance**: did the AI actually answer the question that was asked?
-- **Completeness**: did the AI use all the relevant information from the chunks, or did it miss important parts?
+- **Faithfulness**: did the AI only use info from the chunks, or did it make stuff up?
+- **Relevance**: did the AI actually answer what was asked?
+- **Completeness**: did the AI use all the relevant info from the chunks, or did it miss important parts?
 
 ### A simple way to test
 
-Create a list of questions where you already know what the right answer looks like, then check if the system gets them right. This uses the `build_index` and `query_rag` functions we built earlier:
+Create a list of questions where you already know the right answer, then check if the system gets them right. This uses the `build_index` and `query_rag` functions we built earlier:
 
 ```python
 # Build the index first
@@ -688,61 +688,54 @@ for case in test_cases:
     print(f"  Answer preview: {answer[:150]}...")
 ```
 
-*In plain English: for each test question, we check two things. First, did the search find the right documents? Second, does the AI's answer contain the keywords we'd expect? It's not perfect, but it gives you a concrete starting point to measure improvements.*
+*In plain English: for each test question, we check if the search found the right documents and if the answer contains the keywords we'd expect. Not perfect, but it gives you a concrete starting point.*
 
-Start with 10 to 20 test cases that cover your most important questions. This gives you a baseline. Every time you change something (chunk size, embedding model, prompt), re-run the tests to see if things got better or worse.
+Start with 10 to 20 test cases that cover your most important questions. Every time you change something (chunk size, embedding model, prompt), re-run the tests. That's how you know if things got better or worse.
 
 
 ## Where RAG Falls Short
 {: #where-rag-falls-short}
 
-RAG is a great tool, but it's not the right tool for every job. Knowing its weaknesses upfront will save you from frustration later.
+RAG is great, but it's not the right tool for everything. Knowing these limitations upfront will save you a lot of frustration.
 
 ### Math and calculations
 {: #math-and-calculations}
 
 This is the big one. RAG retrieves text and the AI generates text. Neither step can actually *do math*.
 
-If someone asks "What was our total revenue last quarter?" and your documents have the monthly numbers ($100K in January, $120K in February, $115K in March), the AI has to add those up itself. And AI models are surprisingly bad at arithmetic, especially with larger numbers or multi-step calculations.
+If someone asks "What was our total revenue last quarter?" and your documents have the monthly numbers ($100K in January, $120K in February, $115K in March), the AI has to add those up itself. And AI models are surprisingly bad at arithmetic, especially with larger numbers or multi-step calculations. It might guess, or confidently give the wrong number.
 
-Questions like these are especially problematic:
-- "What's the average deal size across 200 accounts?"
-- "How much did costs increase year over year as a percentage?"
-- "Which region had the highest growth rate?"
-
-The AI might guess, or confidently give you the wrong number. It doesn't have a calculator built in.
-
-**The fix**: for questions involving math, don't rely on RAG alone. Route them to a database query (like SQL) that can do the actual computation, then let the AI explain the result in plain language. We cover this in the [hybrid RAG section](#hybrid-rag-with-structured-data).
+**The fix**: route math questions to a database query (like SQL) that does the actual computation, then let the AI explain the result. We cover this in the [hybrid RAG section](#hybrid-rag-with-structured-data).
 
 ### Summarizing large amounts of data
 
-RAG typically retrieves 3 to 10 chunks. That works great for specific questions. But if someone asks "Summarize all customer complaints from the last 6 months," you might have 500 relevant chunks and you can only show the AI a handful of them.
+RAG typically retrieves 3 to 10 chunks. Great for specific questions. But "summarize all customer complaints from the last 6 months" might have 500 relevant chunks and you can only show the AI a handful.
 
-**The fix**: for broad summary questions, pre-compute summaries and index those. Or route the question to a database that can scan everything.
+**The fix**: pre-compute summaries and index those. Or route to a database that can scan everything.
 
 ### Comparing across multiple documents
 
-RAG finds the best chunks for a single question, but it doesn't understand relationships between documents. If someone asks "How does the policy in Document A contradict what's in Document B?", basic RAG might only retrieve chunks from one of the two documents.
+RAG finds the best chunks for a single question but doesn't understand relationships between documents. "How does the policy in Document A contradict Document B?" might only retrieve chunks from one of them.
 
-**The fix**: use multi-step retrieval. Retrieve once, figure out what other documents are referenced, then retrieve from those too.
+**The fix**: multi-step retrieval. Retrieve once, figure out what other documents are referenced, then retrieve from those too.
 
 ### Stale information
 
-Your RAG system can only answer based on whatever's in its index. If your documents change frequently and you don't re-index, users will get outdated answers without knowing it.
+Your RAG system can only answer based on whatever's in its index. If your documents change and you don't re-index, users get outdated answers without knowing it.
 
-**The fix**: include timestamps in your chunks and show them in answers. For frequently changing sources, set up incremental indexing (adding, updating, or deleting individual documents) rather than rebuilding the entire index from scratch each time. Note that FAISS doesn't natively support deleting individual vectors, so for production systems you'll likely want a vector database like Pinecone or Weaviate that handles this for you. For truly real-time data, query the source directly instead of the index.
+**The fix**: include timestamps in your chunks and show them in answers. Set up incremental indexing rather than rebuilding everything from scratch. FAISS doesn't support deleting individual vectors, so for production you'll probably want a vector database like Pinecone or Weaviate that handles this. For truly real-time data, query the source directly instead of the index.
 
 ### Questions about things that aren't in your documents
 
-RAG is biased toward finding *something*. Even if the answer genuinely isn't in your documents, it'll still retrieve the most similar chunks it can find and try to cobble together an answer. This is one of the most common sources of bad answers.
+This one bit me. RAG is biased toward finding *something*. Even if the answer genuinely isn't in your documents, it'll still retrieve the most similar chunks it can find and try to cobble together an answer.
 
-**The fix**: set a minimum similarity threshold. If the best match scores below that threshold, respond with "I don't have information about that" instead of generating from irrelevant context.
+**The fix**: set a minimum similarity threshold. If the best match is too weak, respond with "I don't have information about that" instead of generating from irrelevant context.
 
 
 ## Access Control in RAG
 {: #access-control-in-rag}
 
-Once your RAG system works, you'll quickly hit a new problem: **not everyone should see everything.** A customer support agent shouldn't be able to pull up HR documents, and an intern shouldn't be retrieving board meeting notes.
+Once your RAG system works, you'll quickly hit a new problem: **not everyone should see everything.** A support agent shouldn't be pulling up HR documents, and an intern shouldn't be retrieving board meeting notes.
 
 ### Why this matters
 
@@ -751,7 +744,7 @@ By default, RAG has no concept of permissions. It finds the most relevant chunks
 ### How to add access control
 {: #how-to-add-access-control}
 
-The most common approach is simple: tag each chunk with who's allowed to see it, then filter the results based on who's asking.
+Tag each chunk with who's allowed to see it, then filter based on who's asking.
 
 ```python
 # When you index a chunk, save who can access it
@@ -787,35 +780,35 @@ def retrieve_with_access(query, user_groups, index, chunks, model, k=5):
     return results
 ```
 
-*In plain English: we search for way more results than we need (10x), then filter out the ones the user isn't allowed to see. We grab a lot extra because many might get filtered out. If we still can't find enough accessible results, we log a warning so you know there might be a problem.*
+*In plain English: search for way more results than you need (10x), then filter out the ones the user isn't allowed to see. We grab extra because many might get filtered out.*
 
 ### Three approaches to filtering
 
 | Approach | How it works | Best for |
 |----------|-------------|----------|
-| **Pre-filter** | Build separate search indexes for each group | Faster searches, but more storage and more indexes to manage |
-| **Post-filter** | Search everything, then remove restricted results | Simpler to set up, but you might end up with too few results if most get filtered |
-| **Built-in filtering** | Use a vector database that supports filtering natively (like Pinecone or Weaviate) | Best option for production because it filters during the search itself, so you always get the right number of results |
+| **Pre-filter** | Build separate search indexes for each group | Faster searches, but more storage and indexes to manage |
+| **Post-filter** | Search everything, then remove restricted results | Simpler, but you might end up with too few results |
+| **Built-in filtering** | Use a vector database that supports filtering natively (Pinecone, Weaviate) | Best for production because it filters during the search itself |
 
-For learning and small projects, post-filtering is fine. For production, use a vector database with built-in metadata filtering. This is one of the strongest reasons to upgrade from FAISS to a managed vector database.
+For learning, post-filtering is fine. For production, use a vector database with built-in metadata filtering. This is honestly one of the strongest reasons to upgrade from FAISS.
 
 ### Watch out for
 
-- **Chunk leakage**: even if you hide the document title, the chunk text itself might reveal sensitive information
-- **Permission drift**: when someone's access changes, your index needs to reflect that. Old permissions in the index are a security hole
-- **Inference attacks**: sometimes retrieving public chunks from related documents lets a user guess what's in the restricted ones
+- **Chunk leakage**: even if you hide the document title, the chunk text itself might reveal sensitive info
+- **Permission drift**: when someone's access changes, your index needs to reflect that. Old permissions = security hole
+- **Inference attacks**: retrieving public chunks from related documents might let a user guess what's in the restricted ones
 
 
 ## Hybrid RAG with Structured Data
 {: #hybrid-rag-with-structured-data}
 
-So far, we've been searching through documents (unstructured text). But many real-world questions also need data from databases, spreadsheets, or APIs (structured data).
+So far we've been searching through documents (unstructured text). But real-world questions often need data from databases, spreadsheets, or APIs too.
 
-For example: "How many customers signed up this month and what did the latest product update include?" The first half needs a database query. The second half needs a document search. Pure RAG can only handle the second half.
+Example: "How many customers signed up this month and what did the latest product update include?" The first half needs a database query. The second half needs a document search. Pure RAG can only handle the second half.
 
 ### The approach
 
-Run multiple search paths at the same time and combine everything before asking the AI to answer:
+Run multiple search paths at the same time and combine everything before asking the AI:
 
 ```
 User Question
@@ -839,13 +832,13 @@ User Question
 ### The hard part: deciding which path to use
 {: #question-routing}
 
-The diagram above makes it look like you always run every path. In practice, the real challenge is figuring out **which path a given question needs**:
+The diagram makes it look like you always run every path. In practice, the real challenge is figuring out **which path a given question needs**:
 
 - "What's our refund policy?" → vector search only (it's in the docs)
 - "How many customers signed up this month?" → SQL only (it's in the database)
-- "How many customers complained about refunds last month?" → both (count from database, context from docs)
+- "How many customers complained about refunds last month?" → both
 
-A simple approach is to use the AI itself to classify the question first:
+You can use the AI itself to classify the question:
 
 ```python
 def classify_question(question, schema_description):
@@ -871,12 +864,12 @@ Respond with exactly one word: DOCS, SQL, or BOTH."""
     return result
 ```
 
-*In plain English: before running any search, we ask the AI to look at the question and decide whether it needs documents, a database query, or both. This saves time and avoids pulling in irrelevant context.*
+*In plain English: before running any search, ask the AI to look at the question and decide whether it needs documents, a database query, or both. Saves time and avoids pulling in irrelevant context.*
 
 ### Turning questions into database queries
 {: #questions-to-sql}
 
-For the database part, you can use the AI itself to write the SQL query. You give it a description of your database tables and it generates the query.
+For the database part, you can use the AI to write the SQL query:
 
 ```python
 def generate_sql(question, schema_description):
@@ -908,17 +901,17 @@ sql = generate_sql("How many customers are on the pro plan?", schema)
 # SELECT COUNT(*) FROM customers WHERE plan = 'pro'
 ```
 
-*In plain English: we describe our database tables to the AI, ask it a question in plain English, and it writes the SQL query for us. Then we can run that query against the actual database to get precise numbers.*
+*In plain English: describe your database tables to the AI, ask a question in plain English, and it writes the SQL for you. Then you run that query against the actual database.*
 
 **Important safety note**: never run AI-generated SQL directly against a production database without safeguards. At a minimum:
-- Use a **read-only database connection** so the AI can't accidentally modify or delete data
-- **Validate the SQL** to make sure it's a SELECT statement (not INSERT, UPDATE, DELETE, or DROP)
-- Consider running against a **read replica** or a copy of the database, not the production instance
-- Set a **query timeout** so a badly generated query can't lock up your database
+- Use a **read-only database connection**
+- **Validate** it's a SELECT statement (not INSERT, UPDATE, DELETE, or DROP)
+- Run against a **read replica**, not production
+- Set a **query timeout** so a bad query can't lock up your database
 
 ### Combining documents and data in one prompt
 
-The trick is clearly labeling each type of context so the AI knows what's what:
+Label each type of context clearly so the AI knows what's what:
 
 ```python
 def build_hybrid_prompt(question, chunks, structured_results):
@@ -946,26 +939,26 @@ Answer:"""
 
 ### Real-world examples
 
-- **Customer support**: search help articles (documents) + look up the customer's account status (database)
+- **Customer support**: search help articles (documents) + look up account status (database)
 - **Internal tools**: search the company wiki (documents) + pull live metrics (API)
-- **Analytics Q&A**: search written reports (documents) + query the actual numbers (data warehouse)
+- **Analytics Q&A**: search written reports (documents) + query actual numbers (data warehouse)
 
-The database path gives the AI precise facts (exact numbers, dates, statuses) while the document path gives it explanations and context. Together they produce much better answers than either one alone.
+The database path gives the AI precise facts (exact numbers, dates, statuses) while the document path gives explanations and context. Together they produce much better answers than either alone.
 
 
 ## Citations and Reducing Hallucination
 {: #citations-and-reducing-hallucination}
 
-"Hallucination" is when an AI makes something up and presents it as fact. This is the biggest trust problem in AI right now, and it's especially dangerous in RAG systems because users expect the answers to come from their actual documents.
+"Hallucination" is when an AI makes something up and presents it as fact. This is the biggest trust problem in AI right now, and it's especially dangerous in RAG because users expect the answers to come from their actual documents.
 
-The good news is that RAG already reduces hallucination compared to asking an AI without any context. But it doesn't eliminate it completely. The AI might still blend its own knowledge with the retrieved context, or interpret the context incorrectly.
+RAG already reduces hallucination compared to asking an AI without context. But it doesn't eliminate it completely. The AI might still blend its own knowledge with the retrieved context, or interpret the context incorrectly.
 
-**Citations are one of the best defenses.** When the AI has to say *where* each piece of its answer came from, it's much harder for it to slip in made-up facts.
+**Citations are one of the best defenses.** When the AI has to say *where* each claim came from, it's much harder for it to slip in made-up facts.
 
 ### How to get citations in your answers
 {: #how-to-get-citations}
 
-The simplest way is to ask for them in your prompt:
+Ask for them in the prompt:
 
 ```
 Answer the question using ONLY the provided context.
@@ -988,15 +981,13 @@ Question: What chunk size should I use?
 Answer:
 ```
 
-A well-prompted model will respond like this:
+A well-prompted model will respond like:
 
 > Chunk sizes between 300-800 tokens work best for most use cases, with 10-20% overlap to preserve context at boundaries [Source: chunking-guide.md].
 
-Now you (or your users) can go check that source document and verify the answer is accurate.
+Now you can go check that source document and verify. That's the whole point.
 
 ### Checking citations automatically
-
-You can write code that verifies whether the AI actually cited sources that were in the retrieved context:
 
 ```python
 import re
@@ -1021,15 +1012,15 @@ result = verify_citations(
 # {"total_citations": 1, "valid": ["rag-overview.md"], "invalid": [], "all_valid": True}
 ```
 
-*In plain English: this code looks at the AI's answer, finds all the citations, and checks if each one actually matches a document that was retrieved. If the AI cites a document that wasn't in the context, something is wrong.*
+*In plain English: looks at the AI's answer, finds all the citations, and checks if each one matches a document that was actually retrieved. If the AI cites something that wasn't in the context, you know something's wrong.*
 
 ### Other ways to reduce hallucination
 {: #other-hallucination-techniques}
 
-- **Set temperature to 0**: temperature controls how "creative" the AI is. For factual Q&A, you want it as low as possible. A temperature of 0 means the AI picks the most likely answer every time instead of being creative.
-- **Use structured output**: ask the AI to respond in JSON with explicit source fields. This makes it harder to sneak in unsupported claims.
-- **Set a confidence threshold**: if the retrieved chunks don't match the question well (low similarity scores), don't generate an answer at all. Just say "I don't have information about that."
-- **Double-check with a second AI call**: generate an answer, then ask a second prompt to verify that every claim in the answer is actually supported by the context.
+- **Set temperature to 0**: temperature controls how "creative" the AI is. For factual Q&A, crank it all the way down. Temperature 0 = most likely answer every time, no creativity.
+- **Use structured output**: ask the AI to respond in JSON with explicit source fields. Makes it harder to sneak in unsupported claims.
+- **Set a confidence threshold**: if the retrieved chunks don't match well (low similarity scores), don't generate an answer. Just say "I don't have information about that."
+- **Double-check with a second AI call**: generate an answer, then ask another prompt to verify every claim is supported by the context.
 
 ```python
 def check_faithfulness(answer, context):
@@ -1052,21 +1043,21 @@ Unsupported claims (or "None" if all claims are supported):"""
     return json.loads(response.text)["response"]
 ```
 
-*In plain English: we take the AI's answer and ask a second AI call to play "fact checker." It looks at the context and identifies any claims that aren't supported. Think of it as having an editor review the AI's work.*
+*In plain English: take the AI's answer and ask a second AI call to play fact checker. It looks at the context and flags any claims that aren't supported. Like having an editor review the work.*
 
 ### The tradeoff to be aware of
 
-The more safeguards you add, the more often the AI will say "I don't know." That's actually the right behavior for factual systems, where a wrong answer is worse than no answer. But if you're building something more exploratory (like a brainstorming tool), you might want fewer guardrails. It depends on what kind of system you're building.
+More safeguards = the AI says "I don't know" more often. That's actually the right behavior for factual systems, where a wrong answer is worse than no answer. But if you're building something more exploratory, you might want fewer guardrails. Depends on what you're building.
 
 
 ## A Complete Worked Example
 {: #a-complete-worked-example}
 
-Let's walk through a real scenario from start to finish so you can see how all the pieces fit together.
+Let me walk through a real scenario from start to finish so you can see all the pieces fit together.
 
 ### The setup
 
-Imagine you have a folder with 3 markdown files about a fictional company:
+Say you have a folder with 3 markdown files about a fictional company:
 
 **company-policies.md:**
 > Our return policy allows customers to return any product within 30 days of purchase for a full refund. Items must be in original packaging and unused condition. Refunds are processed within 5 business days of receiving the returned item.
@@ -1088,7 +1079,7 @@ print(f"Indexed {len(chunks)} chunks from {len(docs)} documents")
 # Indexed 3 chunks from 3 documents
 ```
 
-With short documents like these, each one becomes a single chunk. With longer documents, you'd get multiple chunks per document.
+With short documents like these, each one becomes a single chunk. Longer documents would give you multiple chunks.
 
 ### Step 2: Ask a question
 
@@ -1103,7 +1094,7 @@ print(answer)
 
 1. **The question gets embedded**: "How long do I have to return a product?" becomes a list of 384 numbers
 
-2. **FAISS searches for similar chunks**: it compares those numbers against all chunk embeddings and returns the top 3 matches:
+2. **FAISS searches for similar chunks**: compares those numbers against all chunk embeddings and returns the top 3:
    - `company-policies.md` (similarity: 0.82) ← most relevant
    - `product-faq.md` (similarity: 0.31)
    - `onboarding-guide.md` (similarity: 0.18)
@@ -1130,7 +1121,7 @@ print(answer)
 
 4. **The AI generates an answer**: "You have 30 days from the date of purchase to return a product for a full refund. The item must be in its original packaging and unused condition."
 
-Notice that even though all 3 chunks were sent, the AI correctly focused on the relevant one (company-policies.md) and ignored the other two. A good prompt makes this work.
+Even though all 3 chunks were sent, the AI correctly focused on the relevant one and ignored the other two. A good prompt makes this work.
 
 ### What a bad result looks like
 
@@ -1138,26 +1129,26 @@ Now imagine someone asks: "What's the total cost of the Pro plan for a year?"
 
 This is a math question. The document says $49/month annually, so the answer is $49 x 12 = $588. But the AI might say "$49/month billed annually" without doing the multiplication, or worse, calculate it wrong ("The annual cost is $490").
 
-This is exactly the kind of question where you'd want to route to a structured data path (or at minimum, prompt the AI to show its math) rather than relying on pure RAG.
+This is exactly the kind of question where you'd want to route to a structured data path instead of relying on pure RAG. I talked about this in the [limitations section](#where-rag-falls-short).
 
 
 ## What's Next
 {: #whats-next}
 
-This guide covered the fundamentals of RAG. You now understand how to take documents, parse them into clean text, break them into searchable chunks, find the right ones when someone asks a question, and generate grounded answers. You also know the gotchas: access control, handling structured data, reducing hallucination, and where RAG struggles.
+That's everything I've learned about RAG so far. You now know how to take documents, parse them into clean text, break them into searchable chunks, find the right ones when someone asks a question, and generate grounded answers. You also know the gotchas: access control, structured data, hallucination, and where RAG just doesn't work.
 
-Once you have the basics running, here are some areas to explore next:
+Here's what I'm planning to explore next:
 
-- **Hybrid search**: combine keyword search (BM25) with meaning-based search for better retrieval. Keyword search catches exact matches that embedding search sometimes misses, like product names or error codes.
+- **Hybrid search**: combine keyword search (BM25) with meaning-based search. Keyword search catches exact matches that embeddings sometimes miss, like product names or error codes.
 
-- **Reranking**: add a second, more powerful model (like a cross-encoder) that re-scores your top results after initial retrieval. This is one of the highest-impact improvements you can make because it's cheap to run on just 10-20 results.
+- **Reranking**: add a second model (cross-encoder) that re-scores your top results after initial retrieval. Apparently one of the highest-impact improvements you can make because it's cheap to run on just 10-20 results.
 
-- **Streaming**: show the AI's answer as it's being generated word by word (like ChatGPT does) instead of waiting for the full response. This makes the system feel much faster even when generation takes a few seconds.
+- **Streaming**: show the answer as it's being generated word by word instead of waiting for the full response. Makes it feel way faster.
 
-- **Caching**: save the results of frequent queries so you don't re-compute them every time. If 50 people ask the same question today, you only need to run the full pipeline once.
+- **Caching**: save frequent queries so you don't re-compute them every time. If 50 people ask the same question, you only need to run the pipeline once.
 
-- **Multi-modal RAG**: search through images, tables, and code alongside text. Useful when your documents have diagrams, charts, or code examples that are important for answering questions.
+- **Multi-modal RAG**: search through images, tables, and code alongside text. Useful when documents have diagrams or charts.
 
-- **Production vector databases**: move from FAISS (which runs in memory on one machine) to a hosted vector database like Pinecone, Weaviate, or Qdrant. These handle incremental updates, metadata filtering, scaling, and backups for you.
+- **Production vector databases**: move from FAISS to something like Pinecone, Weaviate, or Qdrant. They handle incremental updates, metadata filtering, scaling, and backups.
 
-The most important thing: **build the simple version first, see how it works, then improve one thing at a time.** Don't try to build the perfect system on day one.
+The most important thing: **build the simple version first, see how it works, then improve one thing at a time.** Don't try to build the perfect system on day one. I definitely didn't.
