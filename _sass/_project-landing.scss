@@ -195,7 +195,6 @@
 body:has(.project-landing) {
   background-color: var(--project-bg);
 
-  > nav,
   > footer:not(.project-landing-footer) {
     display: none;
   }
