@@ -162,7 +162,13 @@
   position: sticky;
   top: calc(60px + var(--space-6));
   max-height: calc(100vh - 60px - var(--space-12));
-  overflow-y: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .guide-toc-nav {
