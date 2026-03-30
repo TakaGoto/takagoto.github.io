@@ -47,7 +47,7 @@ layout: home
   <h2 class="section-label">Featured Project</h2>
   <a href="/ragacademy/" class="featured-card">
     <div class="featured-card-icon">
-      <img src="/ragacademy/icon.svg" alt="RAG Academy icon" />
+      <img src="/ragacademy/icon.svg" alt="RAG Academy icon" loading="lazy" />
     </div>
     <div class="featured-card-content">
       <div class="featured-card-header">
@@ -72,7 +72,7 @@ layout: home
     {% if app.status == "building" %}
     <a href="/{{ app.slug }}/" class="building-card">
       <div class="building-card-icon">
-        <img src="{{ app.icon | relative_url }}" alt="{{ app.name }} icon" />
+        <img src="{{ app.icon | relative_url }}" alt="{{ app.name }} icon" loading="lazy" />
       </div>
       <div class="building-card-info">
         <span class="building-card-name">{{ app.name }}</span>
@@ -86,7 +86,7 @@ layout: home
     {% if app.status == "improving" %}
     <a href="/{{ app.slug }}/" class="building-card">
       <div class="building-card-icon">
-        <img src="{{ app.icon | relative_url }}" alt="{{ app.name }} icon" />
+        <img src="{{ app.icon | relative_url }}" alt="{{ app.name }} icon" loading="lazy" />
       </div>
       <div class="building-card-info">
         <span class="building-card-name">{{ app.name }}</span>

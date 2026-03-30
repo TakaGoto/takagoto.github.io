@@ -1,0 +1,39 @@
+// ============================================================
+// Heading anchor links for posts and guides
+// ============================================================
+
+.heading-anchor {
+  position: absolute;
+  left: -1.5em;
+  top: 0;
+  font-family: var(--font-mono);
+  font-size: 0.75em;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity var(--transition), color var(--transition);
+  padding-right: var(--space-2);
+
+  *:hover > & {
+    opacity: 1;
+  }
+
+  &:hover {
+    color: var(--color-primary);
+  }
+
+  &.anchor-copied {
+    opacity: 1;
+    color: var(--color-primary);
+  }
+}
+
+// On mobile, show anchor to the left inline instead of absolute
+@media (max-width: 640px) {
+  .heading-anchor {
+    position: static;
+    opacity: 0.5;
+    margin-right: var(--space-1);
+  }
+}
