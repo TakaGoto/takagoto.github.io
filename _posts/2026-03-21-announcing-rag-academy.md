@@ -67,4 +67,6 @@ I've shipped a bunch of apps at this point. Some live, some still cooking. But t
 
 If you're curious about RAG but every explanation you've found either assumes you have a PhD or skips the parts that actually matter, this is for you.
 
+You can check out the project on [GitHub](https://github.com/TakaGoto/rag-learning-academy).
+
 More updates coming soon. I'll be building this in the open and writing about the process along the way.
