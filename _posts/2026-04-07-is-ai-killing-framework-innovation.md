@@ -72,9 +72,21 @@ Frameworks that unlock entirely new capabilities still have a path. Edge runtime
 
 What's likely dying is frameworks whose pitch is "a better way to build the same thing." A cleaner React. A faster Express. A more elegant alternative. Those used to be worth adopting. Now the AI gap alone might kill them before they get traction.
 
+## What could change this
+
+There's one thing that could break the cycle: frameworks shipping their own AI.
+
+Open models like Gemma, Llama, and Qwen are fine-tunable. A new framework could train a small, specialized model on its own docs, examples, and idiomatic patterns — then ship it alongside the CLI and the VS Code extension. Day one, developers get AI assistance that actually knows the framework. No waiting years for enough community code to show up in foundation model training data.
+
+The problem is integration. Right now, swapping models in tools like Claude Code, Cursor, or Codex is either unsupported or requires workarounds. You can hack it with LLM gateways, but that's not something most developers will bother with.
+
+If these tools made it easy to say "use this model for this project" — a config file, a per-repo setting — then framework authors could bundle a fine-tuned model the way they bundle a linter config today. That changes the equation. A new framework wouldn't need millions of Stack Overflow answers and open-source projects in the training data. It would bring its own AI that knows exactly how it works.
+
+The lock-in isn't permanent. But it won't break on its own. It needs the AI tooling layer to open up.
+
 ## What this means
 
-If you're building a new framework today, your challenge isn't just convincing developers it's better. It's convincing them to accept worse AI assistance for months or years until the training data catches up — if it ever does.
+If you're building a new framework today, your challenge isn't just convincing developers it's better. It's convincing them to accept worse AI assistance for months or years until the training data catches up — unless you ship your own.
 
 And if you're choosing a stack, AI compatibility is now a real factor. Picking an established framework isn't just about community and libraries anymore. It's about whether your AI tools can actually help you build with it.
 
