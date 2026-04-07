@@ -16,7 +16,7 @@ That flywheel still exists. But there's a new force working against it — and i
 
 ## The frontend was always where the churn happened
 
-Backend frameworks don't change that often. Rails, Django, Express, Spring — they've been dominant for over a decade. Switching your backend is expensive. You're dealing with databases, auth, infrastructure, deployment pipelines. The cost of adopting something new is high and the payoff has to be massive to justify it.
+Backend frameworks don't change that often. Rails, Django, Express, Spring — they've been dominant for over a decade. Switching your backend is expensive. You're dealing with databases, auth, infrastructure, deployment pipelines. The cost of adopting something new is high, and the payoff has to be massive to justify it.
 
 Frontend was different. The cost of trying a new UI framework was lower. You could rebuild a component, test it in a branch, and evaluate without rearchitecting your whole system. That's why frontend frameworks evolved so fast — the barrier to entry was low enough that good ideas could spread quickly.
 
