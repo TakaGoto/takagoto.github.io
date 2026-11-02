@@ -1,0 +1,44 @@
+---
+layout: default
+title: Turnbook privacy policy
+---
+
+<div class="legal-page">
+  <h1>Turnbook privacy policy</h1>
+  <p class="last-updated">Last Updated: November 1, 2026</p>
+<h2>Who publishes Turnbook</h2>
+<p>Turnbook is an iPhone app published by Terror LLC, an Illinois limited liability company. Questions about this policy, or about data Turnbook holds for you, go to support@terrorapps.com.</p>
+<h2>The short version</h2>
+<ul><li>Everything you record stays on your iPhone unless you turn on backup yourself.</li><li>Turnbook has no advertising, no analytics, no crash reporting, no tracking and no third-party software kits.</li><li>Backup is optional. What it sends is encrypted on your iPhone first, and the encryption key never reaches our service.</li><li>Turnbook asks Apple for no name and no email address when you sign in.</li><li>You can delete the backup from inside the app, and that erases our copy.</li></ul>
+<h2>What Turnbook stores on your iPhone</h2>
+<p>When you use Turnbook it writes to your iPhone:</p>
+<ul><li>units you add: the nickname and address you type, and the rooms and items in them</li><li>for each item: the condition you mark, any note you type, and the photographs attached to it</li><li>photographs you take in Turnbook, with the date and time your iPhone's clock reported, and photographs you pick from your photo library, marked in the report as coming from your library</li><li>repair costs you type and the receipt photographs you attach to them</li><li>the tenant's typed or drawn name and the image of their signature, and the date and time it was taken</li><li>the report PDFs Turnbook builds, and amendments added after a report was finished</li><li>app settings such as a unit's check-reminder interval and whether you have seen the welcome tour</li></ul>
+<p>All of it lives in the app's own data-protected storage, with file protection applied so it is unreadable while the iPhone is locked and has not been unlocked since starting. None of it is kept in iOS preference storage.</p>
+<p>Turnbook does not read your photo library. When you add a library photograph, the system picker hands Turnbook only the pictures you selected, which is why the app needs no photo-library permission.</p>
+<h2>Permissions Turnbook asks for</h2>
+<ul><li><strong>Camera.</strong> Asked for the first time you tap a capture tile during a walkthrough, never at launch. It is used only to take photographs into a report. If you decline, the walkthrough still works and you can add photographs from your library instead.</li><li><strong>Notifications.</strong> Asked for only at the moment you turn on a periodic check reminder for a unit. The reminder is scheduled on your iPhone and fires there. Turnbook never notifies or contacts your tenant.</li></ul>
+<p>Turnbook does not ask for your location, your contacts, the microphone, Face ID or Touch ID, permission to add to your photo library, or permission to track you. There is no App Tracking Transparency prompt because there is nothing to track.</p>
+<h2>Optional backup, and exactly what our service holds</h2>
+<p>Backup is off until you set it up on the Backup and restore screen. You can use every other part of Turnbook without it. If you turn it on:</p>
+<ul><li><strong>Sign in with Apple</strong> is the only way to sign in. Turnbook requests no scopes, so Apple sends the app no name and no email address, not even a relay address.</li><li><strong>Account identifier.</strong> Our service stores a SHA-256 hash of the identifier Apple issues for your Apple Account. The identifier itself is used once to compute that hash and is never stored or written to a log.</li><li><strong>Session.</strong> Your iPhone generates a random session token and keeps it in the iPhone keychain. The service stores only a SHA-256 hash of that token, so the token itself exists nowhere but your iPhone.</li><li><strong>Your records.</strong> Units, rooms, items, conditions, notes, photographs, costs, signatures and amendments are encrypted on your iPhone with AES-256-GCM before anything is uploaded. Reports upload when you finish them; a walkthrough in progress is not uploaded at all.</li><li><strong>The key.</strong> A random 32-byte key generated on your iPhone and kept as a synchronizable iCloud Keychain item, so it travels with your Apple Account to your other devices. It is never sent to our service, never written into a file or into the backup, and never logged.</li></ul>
+<p>Our service therefore holds: the hashed account identifier, hashed session tokens, and for each encrypted object an identifier, a short label, a revision number, a size in bytes, a SHA-256 digest and timestamps, plus encrypted bytes it has no way to open. It never receives plaintext, never receives the key, and does not log request bodies, bearer tokens or sign-in tokens.</p>
+<p>The service runs on Cloudflare. Cloudflare carries the network connection and can see the network address a request comes from while it is serving it; Turnbook's own code does not record it. To check your sign-in, the service fetches Apple's published public keys; that request carries nothing about you.</p>
+<p>If the key is not available on a replacement iPhone, because iCloud Keychain is off or you signed in with a different Apple Account, the backup still exists but cannot be opened. Turnbook says so plainly and changes nothing on the iPhone. We cannot open it for you.</p>
+<h2>What Turnbook declares on its App Store privacy label</h2>
+<p>One data type: <strong>User ID</strong>, linked to you, used for app functionality, not used for tracking. That is the hashed account identifier described above, and it applies only if you turn on backup. No tracking, no advertising data, no analytics, no diagnostics.</p>
+<h2>Subscriptions</h2>
+<p>Purchases are handled by Apple. Turnbook never sees your card, your Apple Account email address or your billing address. The App Store tells the app the current prices for your country and whether a subscription is active; Turnbook keeps that entitlement state on your iPhone. No price is written into the app.</p>
+<h2>How long things are kept</h2>
+<ul><li><strong>On your iPhone:</strong> until you delete them. Deleted units, reports, rooms, items and photographs move to Recently deleted and stay recoverable for 30 days, after which the app purges them. Deleting something permanently before then is a separate, clearly named action.</li><li><strong>In the backup:</strong> until the matching record is permanently deleted on your iPhone, or until you delete the backup.</li><li><strong>Delete my backup</strong>, on the Backup and restore screen, erases the encrypted copies, the records describing them and every session, and signs you out. Everything on your iPhone stays exactly as it is. The same Apple Account can start a new backup afterwards.</li><li>Deleting Turnbook from your iPhone deletes everything the app stored there, including reports and PDFs you have not shared anywhere else.</li></ul>
+<h2>Who else sees your data</h2>
+<p>We do not sell personal information and we do not share it for advertising. The only data that leaves your iPhone through Turnbook is the encrypted backup, and only if you turn it on. Cloudflare processes those requests for us as our hosting provider. Apple processes your sign-in and your subscription under Apple's own privacy policy.</p>
+<p>When you share a report PDF, you choose the app and the recipient in the system share sheet. From that point the PDF is in your hands and the receiving service's, not ours.</p>
+<h2>Children</h2>
+<p>Turnbook is a working tool for landlords. It is not directed at children and we do not knowingly collect anything from a child.</p>
+<h2>Your choices</h2>
+<ul><li>Use Turnbook with no account at all. Walkthroughs, the tenant's signature, comparison and the PDF all work without signing in.</li><li>Decline the camera and add photographs from your library instead. The report marks them as library photographs.</li><li>Delete the backup, sign out, delete individual records, or delete the app.</li><li>Write to support@terrorapps.com with a question about data Turnbook holds for you, and we will answer.</li></ul>
+<h2>Changes to this policy</h2>
+<p>If this policy changes, the new text is published on this page with a new date. A change that affects what leaves your iPhone is also called out in the app's release notes.</p>
+<h2>Contact</h2>
+<p>Terror LLC, an Illinois limited liability company. support@terrorapps.com</p>
+</div>
